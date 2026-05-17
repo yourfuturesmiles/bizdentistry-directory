@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dental Practices for Sale — Business of Dentistry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Variables ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bod-dark:          #1a1a2e;
+      --bod-dark-mid:      #2a2a4a;
+      --bod-accent:        #c9a84c;
+      --bod-accent-light:  #e8c97a;
+      --bod-white:         #ffffff;
+      --bod-light-bg:      #f7f7f9;
+      --bod-card-bg:       #ffffff;
+      --bod-border:        #e2e2ea;
+      --bod-text:          #1a1a2e;
+      --bod-text-mid:      #4a4a6a;
+      --bod-text-light:    #7a7a9a;
+      --bod-nhs-blue:      #005eb8;
+      --bod-nhs-bg:        #e8f1fb;
+      --bod-private-green: #1a7a40;
+      --bod-private-bg:    #e8f5ee;
+      --bod-mixed-orange:  #b85000;
+      --bod-mixed-bg:      #fdf0e8;
+      --bod-freehold:      #5a3e9e;
+      --bod-freehold-bg:   #f0ecfb;
+      --font-main: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --shadow-card: 0 2px 8px rgba(26,26,46,0.08), 0 1px 2px rgba(26,26,46,0.04);
+      --shadow-card-hover: 0 6px 20px rgba(26,26,46,0.13), 0 2px 6px rgba(26,26,46,0.06);
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bod-light-bg);
+      color: var(--bod-text);
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ──────────────────────────────────────────────────────── */
+    .header {
+      background: var(--bod-dark);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .header-title {
+      color: var(--bod-white);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .header-subtitle {
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+    .header-count {
+      background: var(--bod-accent);
+      color: var(--bod-dark);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── Filter Bar ──────────────────────────────────────────────────── */
+    .filters {
+      background: var(--bod-white);
+      border-bottom: 1px solid var(--bod-border);
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 130px;
+    }
+    .filter-group label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--bod-text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .filter-group select {
+      background: var(--bod-light-bg);
+      border: 1px solid var(--bod-border);
+      border-radius: var(--radius-sm);
+      padding: 7px 10px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      color: var(--bod-text);
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a7a9a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 30px;
+    }
+    .filter-group select:focus {
+      border-color: var(--bod-accent);
+    }
+    .agent-filters {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .agent-filters label.group-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--bod-text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .agent-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .agent-checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bod-light-bg);
+      border: 1px solid var(--bod-border);
+      border-radius: var(--radius-sm);
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--bod-text-mid);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      user-select: none;
+    }
+    .agent-checkbox-label:has(input:checked) {
+      border-color: var(--bod-dark);
+      background: var(--bod-dark);
+      color: var(--bod-white);
+    }
+    .agent-checkbox-label input { display: none; }
+    .filter-reset {
+      background: none;
+      border: 1px solid var(--bod-border);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px;
+      font-family: var(--font-main);
+      font-size: 12px;
+      color: var(--bod-text-light);
+      cursor: pointer;
+      white-space: nowrap;
+      align-self: flex-end;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .filter-reset:hover { border-color: var(--bod-text-mid); color: var(--bod-text-mid); }
+
+    /* ── Results Bar ─────────────────────────────────────────────────── */
+    .results-bar {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--bod-light-bg);
+    }
+    .results-bar span {
+      font-size: 13px;
+      color: var(--bod-text-light);
+    }
+    .results-bar strong { color: var(--bod-text); font-weight: 600; }
+
+    /* ── Grid ────────────────────────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      padding: 0 20px 24px;
+    }
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; padding: 0 12px 20px; }
+      .header { padding: 14px 12px; }
+      .filters { padding: 12px; }
+      .results-bar { padding: 10px 12px; }
+    }
+    @media (max-width: 480px) {
+      .header-title { font-size: 15px; }
+      .filter-group { min-width: 100%; }
+    }
+
+    /* ── Listing Card ────────────────────────────────────────────────── */
+    .card {
+      background: var(--bod-card-bg);
+      border: 1px solid var(--bod-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+      position: relative;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .featured-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--bod-accent);
+      color: var(--bod-dark);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      z-index: 2;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: var(--bod-border);
+      display: block;
+    }
+    .card-image-placeholder {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(135deg, var(--bod-dark) 0%, var(--bod-dark-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.15);
+      font-size: 32px;
+    }
+
+    .card-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--bod-text);
+      line-height: 1.3;
+    }
+    .card-location {
+      font-size: 13px;
+      color: var(--bod-text-light);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .card-location::before {
+      content: "📍";
+      font-size: 11px;
+    }
+
+    .card-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .badge-nhs      { background: var(--bod-nhs-bg);      color: var(--bod-nhs-blue); }
+    .badge-private  { background: var(--bod-private-bg);  color: var(--bod-private-green); }
+    .badge-mixed    { background: var(--bod-mixed-bg);    color: var(--bod-mixed-orange); }
+    .badge-freehold { background: var(--bod-freehold-bg); color: var(--bod-freehold); }
+    .badge-leasehold{ background: #f5f5f5; color: var(--bod-text-mid); }
+    .badge-surgeries{ background: #f0f4ff; color: #2d4eb5; }
+
+    .card-financials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .financial-item {
+      background: var(--bod-light-bg);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+    }
+    .financial-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--bod-text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 2px;
+    }
+    .financial-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--bod-text);
+    }
+    .financial-value.price {
+      font-size: 14px;
+      color: var(--bod-dark);
+    }
+
+    .card-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .highlight-item {
+      font-size: 12px;
+      color: var(--bod-text-mid);
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+      line-height: 1.4;
+    }
+    .highlight-item::before {
+      content: "·";
+      font-size: 16px;
+      line-height: 1;
+      color: var(--bod-accent);
+      flex-shrink: 0;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--bod-border);
+      background: var(--bod-light-bg);
+    }
+    .agent-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .agent-logo {
+      height: 22px;
+      max-width: 90px;
+      object-fit: contain;
+    }
+    .agent-name {
+      font-size: 11px;
+      color: var(--bod-text-light);
+      font-weight: 500;
+    }
+    .view-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bod-dark);
+      color: var(--bod-white);
+      font-family: var(--font-main);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .view-btn:hover { background: var(--bod-dark-mid); }
+    .view-btn::after { content: "→"; font-size: 13px; }
+
+    /* ── States ──────────────────────────────────────────────────────── */
+    .state-container {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      text-align: center;
+      gap: 12px;
+    }
+    .state-icon { font-size: 36px; }
+    .state-title { font-size: 16px; font-weight: 700; color: var(--bod-text); }
+    .state-desc { font-size: 13px; color: var(--bod-text-light); max-width: 300px; }
+
+    /* Skeleton loading */
+    .skeleton-card {
+      background: var(--bod-card-bg);
+      border: 1px solid var(--bod-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .skeleton-img { width: 100%; height: 160px; background: #ebebf0; }
+    .skeleton-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .skeleton-line {
+      height: 12px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #ebebf0 25%, #f5f5f8 50%, #ebebf0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    .skeleton-line.w-full  { width: 100%; }
+    .skeleton-line.w-3q    { width: 75%; }
+    .skeleton-line.w-half  { width: 50%; }
+    .skeleton-line.w-third { width: 33%; }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────────── */
+    .footer {
+      background: var(--bod-dark);
+      padding: 14px 20px;
+      text-align: center;
+    }
+    .footer a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 11px;
+    }
+    .footer a:hover { color: var(--bod-accent); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div>
+      <div class="header-title">Dental Practices for Sale</div>
+      <div class="header-subtitle">Powered by The Business of Dentistry</div>
+    </div>
+    <div class="header-count" id="listing-count">Loading…</div>
+  </header>
+
+  <!-- Filters -->
+  <div class="filters" id="filters-bar">
+    <div class="filter-group">
+      <label for="filter-region">Region</label>
+      <select id="filter-region">
+        <option value="">All Regions</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="filter-type">Practice Type</label>
+      <select id="filter-type">
+        <option value="">All Types</option>
+        <option value="NHS">NHS</option>
+        <option value="Private">Private</option>
+        <option value="Mixed">Mixed</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="filter-tenure">Tenure</label>
+      <select id="filter-tenure">
+        <option value="">All Tenure</option>
+        <option value="Freehold">Freehold</option>
+        <option value="Leasehold">Leasehold</option>
+      </select>
+    </div>
+    <div class="agent-filters" id="agent-filter-wrap" style="display:none">
+      <span class="group-label">Agent</span>
+      <div class="agent-checkboxes" id="agent-checkboxes"></div>
+    </div>
+    <button class="filter-reset" id="reset-btn">Reset filters</button>
+  </div>
+
+  <!-- Results bar -->
+  <div class="results-bar">
+    <span id="results-label">Loading listings…</span>
+  </div>
+
+  <!-- Grid -->
+  <main class="grid" id="grid">
+    <!-- Skeleton cards shown while loading -->
+    <div class="skeleton-card">
+      <div class="skeleton-img"></div>
+      <div class="skeleton-body">
+        <div class="skeleton-line w-3q"></div>
+        <div class="skeleton-line w-half"></div>
+        <div class="skeleton-line w-full"></div>
+        <div class="skeleton-line w-third"></div>
+      </div>
+    </div>
+    <div class="skeleton-card">
+      <div class="skeleton-img"></div>
+      <div class="skeleton-body">
+        <div class="skeleton-line w-3q"></div>
+        <div class="skeleton-line w-half"></div>
+        <div class="skeleton-line w-full"></div>
+        <div class="skeleton-line w-third"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="https://www.bizdentistry.com" target="_blank" rel="noopener">
+      © The Business of Dentistry — bizdentistry.com
+    </a>
+  </footer>
+
+  <script>
+    // ── Configuration ──────────────────────────────────────────────────
+    // Replace with your actual Railway API URL after deployment:
+    const API_BASE = "https://YOUR-APP.up.railway.app";
+
+    // ── State (in-memory only — no localStorage/sessionStorage in iframe) ──
+    let allListings = [];
+    let allAgents   = {};  // id → agent object
+
+    // ── DOM refs ───────────────────────────────────────────────────────
+    const grid         = document.getElementById("grid");
+    const countEl      = document.getElementById("listing-count");
+    const resultsLabel = document.getElementById("results-label");
+    const regionSel    = document.getElementById("filter-region");
+    const typeSel      = document.getElementById("filter-type");
+    const tenureSel    = document.getElementById("filter-tenure");
+    const agentWrap    = document.getElementById("agent-filter-wrap");
+    const agentBoxes   = document.getElementById("agent-checkboxes");
+    const resetBtn     = document.getElementById("reset-btn");
+
+    // ── Fetch data ─────────────────────────────────────────────────────
+    async function loadData() {
+      try {
+        const [listingsRes, agentsRes] = await Promise.all([
+          fetch(`${API_BASE}/listings`),
+          fetch(`${API_BASE}/agents`),
+        ]);
+
+        if (!listingsRes.ok) throw new Error(`Listings API ${listingsRes.status}`);
+        if (!agentsRes.ok)   throw new Error(`Agents API ${agentsRes.status}`);
+
+        const listings = await listingsRes.json();
+        const agents   = await agentsRes.json();
+
+        agents.forEach(a => { allAgents[a.id] = a; });
+        allListings = listings;
+
+        buildFilters(listings, agents);
+        render();
+      } catch (err) {
+        showError(err.message);
+      }
+    }
+
+    // ── Build dynamic filter options ───────────────────────────────────
+    function buildFilters(listings, agents) {
+      // Region dropdown
+      const regions = [...new Set(
+        listings.map(l => l.region_normalised).filter(Boolean)
+      )].sort();
+      regions.forEach(r => {
+        const opt = document.createElement("option");
+        opt.value = r; opt.textContent = r;
+        regionSel.appendChild(opt);
+      });
+
+      // Agent checkboxes (only active agents)
+      if (agents.length > 1) {
+        agents.forEach(agent => {
+          const label = document.createElement("label");
+          label.className = "agent-checkbox-label";
+          label.innerHTML = `<input type="checkbox" value="${agent.id}" checked />${agent.name}`;
+          label.querySelector("input").addEventListener("change", render);
+          agentBoxes.appendChild(label);
+        });
+        agentWrap.style.display = "";
+      }
+    }
+
+    // ── Filter & render ────────────────────────────────────────────────
+    function getCheckedAgents() {
+      const inputs = agentBoxes.querySelectorAll("input:checked");
+      return new Set([...inputs].map(i => i.value));
+    }
+
+    function applyFilters(listings) {
+      const region   = regionSel.value;
+      const type     = typeSel.value;
+      const tenure   = tenureSel.value;
+      const agents   = getCheckedAgents();
+
+      return listings.filter(l => {
+        if (region && l.region_normalised !== region) return false;
+        if (type   && l.practice_type    !== type)   return false;
+        if (tenure && l.tenure           !== tenure)  return false;
+        if (agentBoxes.querySelectorAll("input").length > 0 && !agents.has(l.agent_id)) return false;
+        return true;
+      });
+    }
+
+    function render() {
+      const filtered = applyFilters(allListings);
+      countEl.textContent = `${filtered.length} listing${filtered.length !== 1 ? "s" : ""}`;
+      resultsLabel.innerHTML = filtered.length > 0
+        ? `Showing <strong>${filtered.length}</strong> dental practice${filtered.length !== 1 ? "s" : ""} for sale`
+        : "No listings match your filters";
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="state-container">
+            <div class="state-icon">🔍</div>
+            <div class="state-title">No listings match your filters</div>
+            <div class="state-desc">Try adjusting the region, type, or tenure filters above.</div>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(listing => renderCard(listing)).join("");
+    }
+
+    // ── Card template ──────────────────────────────────────────────────
+    function renderCard(l) {
+      const agent = allAgents[l.agent_id] || {};
+      const featuredBadge = l.is_featured
+        ? `<div class="featured-badge">⭐ Featured</div>` : "";
+
+      const imageEl = l.image_url
+        ? `<img class="card-image" src="${esc(l.image_url)}" alt="${esc(l.title || '')}" loading="lazy" onerror="this.parentNode.innerHTML=placeholderImg()" />`
+        : `<div class="card-image-placeholder">🦷</div>`;
+
+      const badges = [
+        typeBadge(l.practice_type),
+        tenureBadge(l.tenure),
+        l.num_surgeries ? `<span class="badge badge-surgeries">${l.num_surgeries} surger${l.num_surgeries > 1 ? "ies" : "y"}</span>` : "",
+      ].filter(Boolean).join("");
+
+      const financials = buildFinancials(l);
+      const highlights = buildHighlights(l.highlights);
+      const agentSection = buildAgentSection(agent);
+
+      return `
+<article class="card" data-listing-id="${esc(l.id)}">
+  ${featuredBadge}
+  ${imageEl}
+  <div class="card-body">
+    <div class="card-header">
+      <div class="card-title">${esc(l.title || "Dental Practice for Sale")}</div>
+      ${l.location ? `<div class="card-location">${esc(l.location)}</div>` : ""}
+    </div>
+    ${badges ? `<div class="card-badges">${badges}</div>` : ""}
+    ${financials}
+    ${highlights}
+  </div>
+  <div class="card-footer">
+    ${agentSection}
+    <a href="${esc(l.listing_url || '#')}" target="_blank" rel="noopener noreferrer" class="view-btn">View Listing</a>
+  </div>
+</article>`;
+    }
+
+    function buildFinancials(l) {
+      const items = [
+        l.asking_price          ? { label: "Asking Price",       value: l.asking_price,         cls: "price" } : null,
+        l.turnover              ? { label: "Turnover",           value: l.turnover,              cls: "" } : null,
+        l.ebitda_associate_led  ? { label: "EBITDA (Assoc.)",    value: l.ebitda_associate_led,  cls: "" } : null,
+        l.ebitda_owner_operated ? { label: "EBITDA (Owner)",     value: l.ebitda_owner_operated, cls: "" } : null,
+        l.uda_value             ? { label: "UDA Value",          value: l.uda_value,             cls: "" } : null,
+      ].filter(Boolean);
+
+      if (!items.length) return "";
+      return `<div class="card-financials">
+        ${items.map(i => `
+          <div class="financial-item">
+            <div class="financial-label">${esc(i.label)}</div>
+            <div class="financial-value ${i.cls}">${esc(i.value)}</div>
+          </div>`).join("")}
+      </div>`;
+    }
+
+    function buildHighlights(highlights) {
+      if (!highlights || !highlights.length) return "";
+      const shown = highlights.slice(0, 4);
+      return `<div class="card-highlights">
+        ${shown.map(h => `<div class="highlight-item">${esc(h)}</div>`).join("")}
+      </div>`;
+    }
+
+    function buildAgentSection(agent) {
+      if (!agent.name) return `<div></div>`;
+      if (agent.logo_url) {
+        return `<div class="agent-logo-wrap">
+          <img class="agent-logo" src="${esc(agent.logo_url)}" alt="${esc(agent.name)}" />
+        </div>`;
+      }
+      return `<div class="agent-logo-wrap"><span class="agent-name">${esc(agent.name)}</span></div>`;
+    }
+
+    function typeBadge(type) {
+      if (!type) return "";
+      const map = { "NHS": "nhs", "Private": "private", "Mixed": "mixed" };
+      const cls = map[type] || "nhs";
+      return `<span class="badge badge-${cls}">${esc(type)}</span>`;
+    }
+
+    function tenureBadge(tenure) {
+      if (!tenure) return "";
+      const cls = tenure === "Freehold" ? "freehold" : "leasehold";
+      return `<span class="badge badge-${cls}">${esc(tenure)}</span>`;
+    }
+
+    function placeholderImg() {
+      return `<div class="card-image-placeholder">🦷</div>`;
+    }
+
+    // ── Error state ────────────────────────────────────────────────────
+    function showError(msg) {
+      countEl.textContent = "—";
+      resultsLabel.textContent = "Unable to load listings";
+      grid.innerHTML = `
+        <div class="state-container">
+          <div class="state-icon">⚠️</div>
+          <div class="state-title">Directory temporarily unavailable</div>
+          <div class="state-desc">Please refresh the page to try again. If the problem persists, contact <a href="https://www.bizdentistry.com" target="_blank">bizdentistry.com</a>.</div>
+        </div>`;
+      console.error("[BizDentistry] API error:", msg);
+    }
+
+    // ── Utility: HTML escape ──────────────────────────────────────────
+    function esc(str) {
+      if (str == null) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    // ── Filter event listeners ─────────────────────────────────────────
+    regionSel.addEventListener("change", render);
+    typeSel.addEventListener("change", render);
+    tenureSel.addEventListener("change", render);
+    resetBtn.addEventListener("click", () => {
+      regionSel.value = "";
+      typeSel.value   = "";
+      tenureSel.value = "";
+      agentBoxes.querySelectorAll("input").forEach(i => { i.checked = true; });
+      render();
+    });
+
+    // ── Boot ───────────────────────────────────────────────────────────
+    loadData();
+  </script>
+</body>
+</html>
