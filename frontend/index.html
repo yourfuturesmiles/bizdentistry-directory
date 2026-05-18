@@ -7,35 +7,32 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ── Reset & Variables ───────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bod-dark:          #1a1a2e;
-      --bod-dark-mid:      #2a2a4a;
-      --bod-accent:        #c9a84c;
-      --bod-accent-light:  #e8c97a;
-      --bod-white:         #ffffff;
-      --bod-light-bg:      #f7f7f9;
-      --bod-card-bg:       #ffffff;
-      --bod-border:        #e2e2ea;
-      --bod-text:          #1a1a2e;
-      --bod-text-mid:      #4a4a6a;
-      --bod-text-light:    #7a7a9a;
-      --bod-nhs-blue:      #005eb8;
-      --bod-nhs-bg:        #e8f1fb;
-      --bod-private-green: #1a7a40;
-      --bod-private-bg:    #e8f5ee;
-      --bod-mixed-orange:  #b85000;
-      --bod-mixed-bg:      #fdf0e8;
-      --bod-freehold:      #5a3e9e;
-      --bod-freehold-bg:   #f0ecfb;
+      --bod-dark:         #1a1a2e;
+      --bod-dark-mid:     #2a2a4a;
+      --bod-accent:       #c9a84c;
+      --bod-white:        #ffffff;
+      --bod-light-bg:     #f7f7f9;
+      --bod-border:       #e2e2ea;
+      --bod-text:         #1a1a2e;
+      --bod-text-mid:     #4a4a6a;
+      --bod-text-light:   #7a7a9a;
+      --bod-nhs-blue:     #005eb8;
+      --bod-nhs-bg:       #e8f1fb;
+      --bod-private-green:#1a7a40;
+      --bod-private-bg:   #e8f5ee;
+      --bod-mixed-orange: #b85000;
+      --bod-mixed-bg:     #fdf0e8;
+      --bod-freehold:     #5a3e9e;
+      --bod-freehold-bg:  #f0ecfb;
       --font-main: 'Inter', 'Helvetica Neue', Arial, sans-serif;
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 14px;
-      --shadow-card: 0 2px 8px rgba(26,26,46,0.08), 0 1px 2px rgba(26,26,46,0.04);
-      --shadow-card-hover: 0 6px 20px rgba(26,26,46,0.13), 0 2px 6px rgba(26,26,46,0.06);
+      --shadow-card: 0 2px 8px rgba(26,26,46,0.08);
+      --shadow-card-hover: 0 6px 20px rgba(26,26,46,0.14);
     }
 
     body {
@@ -47,31 +44,43 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Header ──────────────────────────────────────────────────────── */
+    /* ── Widget container — internal scroll so Wix iframe height is fixed ── */
+    .widget {
+      height: 920px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .widget-scroll {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ── */
     .header {
       background: var(--bod-dark);
-      padding: 18px 20px;
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      flex-shrink: 0;
     }
-    .header-title {
+    .header-left h1 {
       color: var(--bod-white);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
-      letter-spacing: -0.3px;
     }
-    .header-subtitle {
-      color: rgba(255,255,255,0.55);
-      font-size: 12px;
-      font-weight: 400;
-      margin-top: 2px;
+    .header-left p {
+      color: rgba(255,255,255,0.45);
+      font-size: 11px;
+      margin-top: 1px;
     }
     .header-count {
       background: var(--bod-accent);
       color: var(--bod-dark);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 20px;
@@ -79,24 +88,24 @@
       flex-shrink: 0;
     }
 
-    /* ── Filter Bar ──────────────────────────────────────────────────── */
+    /* ── Filters ── */
     .filters {
       background: var(--bod-white);
       border-bottom: 1px solid var(--bod-border);
-      padding: 14px 20px;
+      padding: 12px 20px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       align-items: flex-end;
+      flex-shrink: 0;
     }
     .filter-group {
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      min-width: 130px;
+      gap: 3px;
     }
     .filter-group label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       color: var(--bod-text-light);
       text-transform: uppercase;
@@ -106,375 +115,255 @@
       background: var(--bod-light-bg);
       border: 1px solid var(--bod-border);
       border-radius: var(--radius-sm);
-      padding: 7px 10px;
+      padding: 6px 28px 6px 10px;
       font-family: var(--font-main);
       font-size: 13px;
       color: var(--bod-text);
       cursor: pointer;
       outline: none;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a7a9a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%237a7a9a' d='M5 7L0 2h10z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 10px center;
-      padding-right: 30px;
+      min-width: 130px;
     }
-    .filter-group select:focus {
-      border-color: var(--bod-accent);
-    }
-    .agent-filters {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .agent-filters label.group-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--bod-text-light);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .agent-checkboxes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .agent-checkbox-label {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--bod-light-bg);
-      border: 1px solid var(--bod-border);
-      border-radius: var(--radius-sm);
-      padding: 6px 10px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--bod-text-mid);
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s, color 0.15s;
-      user-select: none;
-    }
-    .agent-checkbox-label:has(input:checked) {
-      border-color: var(--bod-dark);
-      background: var(--bod-dark);
-      color: var(--bod-white);
-    }
-    .agent-checkbox-label input { display: none; }
+    .filter-group select:focus { border-color: var(--bod-accent); }
     .filter-reset {
       background: none;
       border: 1px solid var(--bod-border);
       border-radius: var(--radius-sm);
-      padding: 7px 12px;
+      padding: 6px 12px;
       font-family: var(--font-main);
       font-size: 12px;
       color: var(--bod-text-light);
       cursor: pointer;
-      white-space: nowrap;
       align-self: flex-end;
-      transition: border-color 0.15s, color 0.15s;
     }
     .filter-reset:hover { border-color: var(--bod-text-mid); color: var(--bod-text-mid); }
 
-    /* ── Results Bar ─────────────────────────────────────────────────── */
+    /* ── Results bar ── */
     .results-bar {
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      background: var(--bod-light-bg);
-    }
-    .results-bar span {
-      font-size: 13px;
+      padding: 10px 20px;
+      font-size: 12px;
       color: var(--bod-text-light);
+      flex-shrink: 0;
     }
-    .results-bar strong { color: var(--bod-text); font-weight: 600; }
+    .results-bar strong { color: var(--bod-text); }
 
-    /* ── Grid ────────────────────────────────────────────────────────── */
+    /* ── Grid ── */
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      padding: 0 20px 24px;
-    }
-    @media (max-width: 640px) {
-      .grid { grid-template-columns: 1fr; padding: 0 12px 20px; }
-      .header { padding: 14px 12px; }
-      .filters { padding: 12px; }
-      .results-bar { padding: 10px 12px; }
-    }
-    @media (max-width: 480px) {
-      .header-title { font-size: 15px; }
-      .filter-group { min-width: 100%; }
+      gap: 14px;
+      padding: 0 20px 20px;
     }
 
-    /* ── Listing Card ────────────────────────────────────────────────── */
+    /* ── Card ── */
     .card {
-      background: var(--bod-card-bg);
+      background: var(--bod-white);
       border: 1px solid var(--bod-border);
       border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
-      transition: box-shadow 0.2s, transform 0.2s;
       position: relative;
+      transition: box-shadow 0.2s, transform 0.18s;
     }
-    .card:hover {
-      box-shadow: var(--shadow-card-hover);
-      transform: translateY(-2px);
-    }
+    .card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
 
     .featured-badge {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      top: 10px; left: 10px;
       background: var(--bod-accent);
       color: var(--bod-dark);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      padding: 3px 8px;
+      padding: 3px 7px;
       border-radius: 4px;
       z-index: 2;
     }
-
-    .card-image {
+    .card-img {
       width: 100%;
-      height: 160px;
+      height: 150px;
       object-fit: cover;
-      background: var(--bod-border);
       display: block;
+      background: var(--bod-border);
     }
-    .card-image-placeholder {
+    .card-img-placeholder {
       width: 100%;
-      height: 160px;
+      height: 150px;
       background: linear-gradient(135deg, var(--bod-dark) 0%, var(--bod-dark-mid) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,0.15);
-      font-size: 32px;
+      font-size: 28px;
+      color: rgba(255,255,255,0.12);
     }
 
-    .card-body {
-      padding: 16px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .card-body { padding: 14px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
 
-    .card-header {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .card-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--bod-text);
-      line-height: 1.3;
-    }
-    .card-location {
-      font-size: 13px;
-      color: var(--bod-text-light);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .card-location::before {
-      content: "📍";
-      font-size: 11px;
-    }
+    .card-title { font-size: 14px; font-weight: 700; line-height: 1.3; }
+    .card-location { font-size: 12px; color: var(--bod-text-light); }
+    .card-location::before { content: "📍 "; }
 
-    .card-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-    .badge {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-    .badge-nhs      { background: var(--bod-nhs-bg);      color: var(--bod-nhs-blue); }
-    .badge-private  { background: var(--bod-private-bg);  color: var(--bod-private-green); }
-    .badge-mixed    { background: var(--bod-mixed-bg);    color: var(--bod-mixed-orange); }
-    .badge-freehold { background: var(--bod-freehold-bg); color: var(--bod-freehold); }
-    .badge-leasehold{ background: #f5f5f5; color: var(--bod-text-mid); }
-    .badge-surgeries{ background: #f0f4ff; color: #2d4eb5; }
+    .badges { display: flex; flex-wrap: wrap; gap: 4px; }
+    .badge { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; }
+    .badge-nhs       { background: var(--bod-nhs-bg);      color: var(--bod-nhs-blue); }
+    .badge-private   { background: var(--bod-private-bg);  color: var(--bod-private-green); }
+    .badge-mixed     { background: var(--bod-mixed-bg);    color: var(--bod-mixed-orange); }
+    .badge-freehold  { background: var(--bod-freehold-bg); color: var(--bod-freehold); }
+    .badge-leasehold { background: #f5f5f5;                color: var(--bod-text-mid); }
+    .badge-surgeries { background: #eef1ff;                color: #3a4fcc; }
 
-    .card-financials {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .financial-item {
-      background: var(--bod-light-bg);
-      border-radius: var(--radius-sm);
-      padding: 8px 10px;
-    }
-    .financial-label {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--bod-text-light);
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      margin-bottom: 2px;
-    }
-    .financial-value {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--bod-text);
-    }
-    .financial-value.price {
-      font-size: 14px;
-      color: var(--bod-dark);
-    }
+    .financials { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .fin-item { background: var(--bod-light-bg); border-radius: var(--radius-sm); padding: 7px 9px; }
+    .fin-label { font-size: 9px; font-weight: 600; color: var(--bod-text-light); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 1px; }
+    .fin-value { font-size: 12px; font-weight: 600; color: var(--bod-text); }
+    .fin-value.price { font-size: 13px; }
 
-    .card-highlights {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-    .highlight-item {
-      font-size: 12px;
-      color: var(--bod-text-mid);
-      display: flex;
-      align-items: flex-start;
-      gap: 5px;
-      line-height: 1.4;
-    }
-    .highlight-item::before {
-      content: "·";
-      font-size: 16px;
-      line-height: 1;
-      color: var(--bod-accent);
-      flex-shrink: 0;
-    }
+    .highlights { display: flex; flex-direction: column; gap: 2px; }
+    .highlight { font-size: 11px; color: var(--bod-text-mid); display: flex; gap: 5px; }
+    .highlight::before { content: "·"; color: var(--bod-accent); font-size: 14px; line-height: 1; flex-shrink: 0; }
 
     .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 12px 16px;
-      border-top: 1px solid var(--bod-border);
-      background: var(--bod-light-bg);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px; border-top: 1px solid var(--bod-border);
+      background: var(--bod-light-bg); gap: 8px;
     }
-    .agent-logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .agent-logo {
-      height: 22px;
-      max-width: 90px;
-      object-fit: contain;
-    }
-    .agent-name {
-      font-size: 11px;
-      color: var(--bod-text-light);
-      font-weight: 500;
-    }
-    .view-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--bod-dark);
-      color: var(--bod-white);
-      font-family: var(--font-main);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 7px 14px;
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      white-space: nowrap;
+    .broker-name { font-size: 11px; color: var(--bod-text-light); font-weight: 500; }
+    .broker-logo { height: 20px; max-width: 80px; object-fit: contain; }
+    .btn-enquire {
+      background: var(--bod-dark); color: var(--bod-white);
+      font-family: var(--font-main); font-size: 12px; font-weight: 600;
+      padding: 6px 13px; border-radius: var(--radius-sm);
+      border: none; cursor: pointer; white-space: nowrap;
       transition: background 0.15s;
     }
-    .view-btn:hover { background: var(--bod-dark-mid); }
-    .view-btn::after { content: "→"; font-size: 13px; }
+    .btn-enquire:hover { background: var(--bod-dark-mid); }
 
-    /* ── States ──────────────────────────────────────────────────────── */
-    .state-container {
+    /* ── States ── */
+    .state-box {
       grid-column: 1 / -1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 20px;
-      text-align: center;
-      gap: 12px;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 50px 20px; text-align: center; gap: 10px;
     }
-    .state-icon { font-size: 36px; }
-    .state-title { font-size: 16px; font-weight: 700; color: var(--bod-text); }
-    .state-desc { font-size: 13px; color: var(--bod-text-light); max-width: 300px; }
+    .state-box .icon { font-size: 32px; }
+    .state-box .title { font-size: 15px; font-weight: 700; }
+    .state-box .desc { font-size: 12px; color: var(--bod-text-light); max-width: 280px; }
 
-    /* Skeleton loading */
-    .skeleton-card {
-      background: var(--bod-card-bg);
-      border: 1px solid var(--bod-border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-    }
-    .skeleton-img { width: 100%; height: 160px; background: #ebebf0; }
-    .skeleton-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-    .skeleton-line {
-      height: 12px;
-      border-radius: 4px;
+    /* Skeleton */
+    .skel { background: var(--bod-white); border: 1px solid var(--bod-border); border-radius: var(--radius-lg); overflow: hidden; }
+    .skel-img { width: 100%; height: 150px; background: #ebebf0; }
+    .skel-body { padding: 14px; display: flex; flex-direction: column; gap: 9px; }
+    .skel-line {
+      height: 11px; border-radius: 4px;
       background: linear-gradient(90deg, #ebebf0 25%, #f5f5f8 50%, #ebebf0 75%);
       background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
+      animation: shimmer 1.4s infinite;
     }
-    .skeleton-line.w-full  { width: 100%; }
-    .skeleton-line.w-3q    { width: 75%; }
-    .skeleton-line.w-half  { width: 50%; }
-    .skeleton-line.w-third { width: 33%; }
-    @keyframes shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
+    .w100 { width: 100%; } .w75 { width: 75%; } .w50 { width: 50%; } .w33 { width: 33%; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-    /* ── Footer ──────────────────────────────────────────────────────── */
+    /* ── Footer ── */
     .footer {
-      background: var(--bod-dark);
-      padding: 14px 20px;
-      text-align: center;
+      background: var(--bod-dark); padding: 12px 20px; text-align: center;
+      flex-shrink: 0;
     }
-    .footer a {
-      color: rgba(255,255,255,0.4);
-      text-decoration: none;
-      font-size: 11px;
-    }
+    .footer a { color: rgba(255,255,255,0.35); font-size: 11px; text-decoration: none; }
     .footer a:hover { color: var(--bod-accent); }
+    .footer-updated { color: rgba(255,255,255,0.25); font-size: 10px; margin-top: 2px; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(10,10,30,0.6); z-index: 100;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--bod-white); border-radius: var(--radius-lg);
+      width: 100%; max-width: 440px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+    .modal-header {
+      background: var(--bod-dark); padding: 16px 20px;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+    }
+    .modal-header h2 { color: var(--bod-white); font-size: 15px; font-weight: 700; line-height: 1.3; }
+    .modal-header p { color: rgba(255,255,255,0.5); font-size: 11px; margin-top: 3px; }
+    .modal-close {
+      background: none; border: none; color: rgba(255,255,255,0.5);
+      font-size: 20px; cursor: pointer; line-height: 1; padding: 0; flex-shrink: 0;
+    }
+    .modal-close:hover { color: var(--bod-white); }
+    .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group label { font-size: 11px; font-weight: 600; color: var(--bod-text-mid); }
+    .form-group input,
+    .form-group textarea {
+      border: 1px solid var(--bod-border); border-radius: var(--radius-sm);
+      padding: 9px 12px; font-family: var(--font-main); font-size: 13px;
+      color: var(--bod-text); outline: none; width: 100%;
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--bod-accent); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn-submit {
+      background: var(--bod-dark); color: var(--bod-white);
+      border: none; border-radius: var(--radius-sm);
+      padding: 11px; font-family: var(--font-main); font-size: 13px; font-weight: 600;
+      cursor: pointer; width: 100%; transition: background 0.15s;
+    }
+    .btn-submit:hover { background: var(--bod-dark-mid); }
+    .btn-submit:disabled { background: var(--bod-text-light); cursor: not-allowed; }
+    .form-success {
+      text-align: center; padding: 30px 20px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .form-success .icon { font-size: 36px; }
+    .form-success h3 { font-size: 16px; font-weight: 700; }
+    .form-success p { font-size: 13px; color: var(--bod-text-mid); }
+    .form-error { font-size: 12px; color: #c0392b; padding: 8px 12px; background: #fdf2f2; border-radius: var(--radius-sm); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; padding: 0 12px 16px; }
+      .header { padding: 12px; }
+      .filters { padding: 10px 12px; }
+      .results-bar { padding: 8px 12px; }
+      .form-row { grid-template-columns: 1fr; }
+      .widget { height: 100vh; }
+    }
   </style>
 </head>
 <body>
 
+<div class="widget">
+
   <!-- Header -->
   <header class="header">
-    <div>
-      <div class="header-title">Dental Practices for Sale</div>
-      <div class="header-subtitle">Powered by The Business of Dentistry</div>
+    <div class="header-left">
+      <h1>Dental Practices for Sale</h1>
+      <p>Powered by The Business of Dentistry</p>
     </div>
     <div class="header-count" id="listing-count">Loading…</div>
   </header>
 
   <!-- Filters -->
-  <div class="filters" id="filters-bar">
+  <div class="filters">
     <div class="filter-group">
-      <label for="filter-region">Region</label>
-      <select id="filter-region">
-        <option value="">All Regions</option>
-      </select>
+      <label for="f-region">Region</label>
+      <select id="f-region"><option value="">All Regions</option></select>
     </div>
     <div class="filter-group">
-      <label for="filter-type">Practice Type</label>
-      <select id="filter-type">
+      <label for="f-type">Practice Type</label>
+      <select id="f-type">
         <option value="">All Types</option>
         <option value="NHS">NHS</option>
         <option value="Private">Private</option>
@@ -482,297 +371,404 @@
       </select>
     </div>
     <div class="filter-group">
-      <label for="filter-tenure">Tenure</label>
-      <select id="filter-tenure">
+      <label for="f-tenure">Tenure</label>
+      <select id="f-tenure">
         <option value="">All Tenure</option>
         <option value="Freehold">Freehold</option>
         <option value="Leasehold">Leasehold</option>
       </select>
     </div>
-    <div class="agent-filters" id="agent-filter-wrap" style="display:none">
-      <span class="group-label">Agent</span>
-      <div class="agent-checkboxes" id="agent-checkboxes"></div>
+    <div class="filter-group">
+      <label for="f-broker">Broker</label>
+      <select id="f-broker"><option value="">All Brokers</option></select>
     </div>
-    <button class="filter-reset" id="reset-btn">Reset filters</button>
+    <button class="filter-reset" id="reset-btn">Reset</button>
   </div>
 
   <!-- Results bar -->
-  <div class="results-bar">
-    <span id="results-label">Loading listings…</span>
-  </div>
+  <div class="results-bar" id="results-bar">Loading listings…</div>
 
-  <!-- Grid -->
-  <main class="grid" id="grid">
-    <!-- Skeleton cards shown while loading -->
-    <div class="skeleton-card">
-      <div class="skeleton-img"></div>
-      <div class="skeleton-body">
-        <div class="skeleton-line w-3q"></div>
-        <div class="skeleton-line w-half"></div>
-        <div class="skeleton-line w-full"></div>
-        <div class="skeleton-line w-third"></div>
+  <!-- Scrollable content -->
+  <div class="widget-scroll">
+    <!-- Grid -->
+    <main class="grid" id="grid">
+      <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w75"></div><div class="skel-line w50"></div><div class="skel-line w100"></div><div class="skel-line w33"></div></div></div>
+      <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w75"></div><div class="skel-line w50"></div><div class="skel-line w100"></div><div class="skel-line w33"></div></div></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div><a href="https://www.bizdentistry.com" target="_blank" rel="noopener">© The Business of Dentistry — bizdentistry.com</a></div>
+      <div class="footer-updated" id="last-updated"></div>
+    </footer>
+  </div>
+</div>
+
+<!-- Lead Capture Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 id="modal-title">Find Out More</h2>
+        <p id="modal-broker"></p>
+      </div>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+    <div id="modal-body">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-name">Full Name *</label>
+            <input type="text" id="f-name" placeholder="Dr Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="f-phone">Phone *</label>
+            <input type="tel" id="f-phone" placeholder="07700 900000" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="f-email">Email Address *</label>
+          <input type="email" id="f-email" placeholder="jane@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="f-message">Message (optional)</label>
+          <textarea id="f-message" placeholder="I'm interested in this practice…"></textarea>
+        </div>
+        <div id="form-error" class="form-error" style="display:none"></div>
+        <button class="btn-submit" id="btn-submit">Send Enquiry</button>
+        <p style="font-size:11px;color:var(--bod-text-light);text-align:center">Your details will be shared with the listing broker.</p>
       </div>
     </div>
-    <div class="skeleton-card">
-      <div class="skeleton-img"></div>
-      <div class="skeleton-body">
-        <div class="skeleton-line w-3q"></div>
-        <div class="skeleton-line w-half"></div>
-        <div class="skeleton-line w-full"></div>
-        <div class="skeleton-line w-third"></div>
-      </div>
-    </div>
-  </main>
+  </div>
+</div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <a href="https://www.bizdentistry.com" target="_blank" rel="noopener">
-      © The Business of Dentistry — bizdentistry.com
-    </a>
-  </footer>
+<script>
+  // ── Config ─────────────────────────────────────────────────────────────
+  const SHEET_ID     = "1_hg1pnD_C8xGh4Y8Aisdio1MutMNrZ5pj5KfLYRtGQY";
+  const SHEET_URL    = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=listings`;
 
-  <script>
-    // ── Configuration ──────────────────────────────────────────────────
-    // Replace with your actual Railway API URL after deployment:
-    const API_BASE = "https://YOUR-APP.up.railway.app";
+  // Replace with your Apps Script /exec URL after deploying the script:
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyI7-iiIVx21r_aH-mfBFwY4y5p_T8Z96YshzY1JHA9pr2fO962M16_lSSjZX96PBvkTw/exec";
 
-    // ── State (in-memory only — no localStorage/sessionStorage in iframe) ──
-    let allListings = [];
-    let allAgents   = {};  // id → agent object
+  // ── State ───────────────────────────────────────────────────────────────
+  let allListings   = [];
+  let currentListing = null;
 
-    // ── DOM refs ───────────────────────────────────────────────────────
-    const grid         = document.getElementById("grid");
-    const countEl      = document.getElementById("listing-count");
-    const resultsLabel = document.getElementById("results-label");
-    const regionSel    = document.getElementById("filter-region");
-    const typeSel      = document.getElementById("filter-type");
-    const tenureSel    = document.getElementById("filter-tenure");
-    const agentWrap    = document.getElementById("agent-filter-wrap");
-    const agentBoxes   = document.getElementById("agent-checkboxes");
-    const resetBtn     = document.getElementById("reset-btn");
+  // ── DOM ─────────────────────────────────────────────────────────────────
+  const grid        = document.getElementById("grid");
+  const countEl     = document.getElementById("listing-count");
+  const resultsBar  = document.getElementById("results-bar");
+  const lastUpdated = document.getElementById("last-updated");
+  const fRegion     = document.getElementById("f-region");
+  const fType       = document.getElementById("f-type");
+  const fTenure     = document.getElementById("f-tenure");
+  const fBroker     = document.getElementById("f-broker");
+  const resetBtn    = document.getElementById("reset-btn");
+  const modal       = document.getElementById("modal");
+  const modalTitle  = document.getElementById("modal-title");
+  const modalBroker = document.getElementById("modal-broker");
+  const modalBody   = document.getElementById("modal-body");
+  const modalClose  = document.getElementById("modal-close");
+  const btnSubmit   = document.getElementById("btn-submit");
+  const formError   = document.getElementById("form-error");
 
-    // ── Fetch data ─────────────────────────────────────────────────────
-    async function loadData() {
-      try {
-        const [listingsRes, agentsRes] = await Promise.all([
-          fetch(`${API_BASE}/listings`),
-          fetch(`${API_BASE}/agents`),
-        ]);
+  // ── Load data from Google Sheets ────────────────────────────────────────
+  async function loadData() {
+    try {
+      const res  = await fetch(SHEET_URL);
+      const text = await res.text();
 
-        if (!listingsRes.ok) throw new Error(`Listings API ${listingsRes.status}`);
-        if (!agentsRes.ok)   throw new Error(`Agents API ${agentsRes.status}`);
+      // Strip Google's non-JSON wrapper
+      const json = JSON.parse(text.slice(47, -2));
 
-        const listings = await listingsRes.json();
-        const agents   = await agentsRes.json();
-
-        agents.forEach(a => { allAgents[a.id] = a; });
-        allListings = listings;
-
-        buildFilters(listings, agents);
-        render();
-      } catch (err) {
-        showError(err.message);
-      }
-    }
-
-    // ── Build dynamic filter options ───────────────────────────────────
-    function buildFilters(listings, agents) {
-      // Region dropdown
-      const regions = [...new Set(
-        listings.map(l => l.region_normalised).filter(Boolean)
-      )].sort();
-      regions.forEach(r => {
-        const opt = document.createElement("option");
-        opt.value = r; opt.textContent = r;
-        regionSel.appendChild(opt);
+      // Build column name → index map
+      const cols = {};
+      json.table.cols.forEach((c, i) => {
+        if (c.label) cols[c.label.trim()] = i;
       });
 
-      // Agent checkboxes (only active agents)
-      if (agents.length > 1) {
-        agents.forEach(agent => {
-          const label = document.createElement("label");
-          label.className = "agent-checkbox-label";
-          label.innerHTML = `<input type="checkbox" value="${agent.id}" checked />${agent.name}`;
-          label.querySelector("input").addEventListener("change", render);
-          agentBoxes.appendChild(label);
-        });
-        agentWrap.style.display = "";
-      }
-    }
+      // Parse rows
+      const rows = json.table.rows || [];
+      allListings = rows
+        .map(r => {
+          const get = name => {
+            const i = cols[name];
+            if (i === undefined) return null;
+            const cell = r.c[i];
+            return (cell && cell.v !== null) ? String(cell.v).trim() : null;
+          };
+          return {
+            listing_id:        get("listing_id"),
+            broker_name:       get("broker_name"),
+            broker_slug:       get("broker_slug"),
+            broker_logo_url:   get("broker_logo_url"),
+            title:             get("title"),
+            location:          get("location"),
+            region:            get("region"),
+            practice_type:     get("practice_type"),
+            tenure:            get("tenure"),
+            num_surgeries:     get("num_surgeries"),
+            asking_price:      get("asking_price"),
+            turnover:          get("turnover"),
+            ebitda:            get("ebitda"),
+            uda_value:         get("uda_value"),
+            highlights:        get("highlights"),
+            listing_url:       get("listing_url"),
+            image_url:         get("image_url"),
+            is_featured:       (get("is_featured") || "").toUpperCase() === "TRUE",
+            is_active:         (get("is_active") || "TRUE").toUpperCase() !== "FALSE",
+            scraped_date:      get("scraped_date"),
+          };
+        })
+        .filter(l => l.is_active && l.title);
 
-    // ── Filter & render ────────────────────────────────────────────────
-    function getCheckedAgents() {
-      const inputs = agentBoxes.querySelectorAll("input:checked");
-      return new Set([...inputs].map(i => i.value));
-    }
+      // Sort: featured first, then by title
+      allListings.sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
 
-    function applyFilters(listings) {
-      const region   = regionSel.value;
-      const type     = typeSel.value;
-      const tenure   = tenureSel.value;
-      const agents   = getCheckedAgents();
-
-      return listings.filter(l => {
-        if (region && l.region_normalised !== region) return false;
-        if (type   && l.practice_type    !== type)   return false;
-        if (tenure && l.tenure           !== tenure)  return false;
-        if (agentBoxes.querySelectorAll("input").length > 0 && !agents.has(l.agent_id)) return false;
-        return true;
-      });
-    }
-
-    function render() {
-      const filtered = applyFilters(allListings);
-      countEl.textContent = `${filtered.length} listing${filtered.length !== 1 ? "s" : ""}`;
-      resultsLabel.innerHTML = filtered.length > 0
-        ? `Showing <strong>${filtered.length}</strong> dental practice${filtered.length !== 1 ? "s" : ""} for sale`
-        : "No listings match your filters";
-
-      if (filtered.length === 0) {
-        grid.innerHTML = `
-          <div class="state-container">
-            <div class="state-icon">🔍</div>
-            <div class="state-title">No listings match your filters</div>
-            <div class="state-desc">Try adjusting the region, type, or tenure filters above.</div>
-          </div>`;
-        return;
-      }
-
-      grid.innerHTML = filtered.map(listing => renderCard(listing)).join("");
-    }
-
-    // ── Card template ──────────────────────────────────────────────────
-    function renderCard(l) {
-      const agent = allAgents[l.agent_id] || {};
-      const featuredBadge = l.is_featured
-        ? `<div class="featured-badge">⭐ Featured</div>` : "";
-
-      const imageEl = l.image_url
-        ? `<img class="card-image" src="${esc(l.image_url)}" alt="${esc(l.title || '')}" loading="lazy" onerror="this.parentNode.innerHTML=placeholderImg()" />`
-        : `<div class="card-image-placeholder">🦷</div>`;
-
-      const badges = [
-        typeBadge(l.practice_type),
-        tenureBadge(l.tenure),
-        l.num_surgeries ? `<span class="badge badge-surgeries">${l.num_surgeries} surger${l.num_surgeries > 1 ? "ies" : "y"}</span>` : "",
-      ].filter(Boolean).join("");
-
-      const financials = buildFinancials(l);
-      const highlights = buildHighlights(l.highlights);
-      const agentSection = buildAgentSection(agent);
-
-      return `
-<article class="card" data-listing-id="${esc(l.id)}">
-  ${featuredBadge}
-  ${imageEl}
-  <div class="card-body">
-    <div class="card-header">
-      <div class="card-title">${esc(l.title || "Dental Practice for Sale")}</div>
-      ${l.location ? `<div class="card-location">${esc(l.location)}</div>` : ""}
-    </div>
-    ${badges ? `<div class="card-badges">${badges}</div>` : ""}
-    ${financials}
-    ${highlights}
-  </div>
-  <div class="card-footer">
-    ${agentSection}
-    <a href="${esc(l.listing_url || '#')}" target="_blank" rel="noopener noreferrer" class="view-btn">View Listing</a>
-  </div>
-</article>`;
-    }
-
-    function buildFinancials(l) {
-      const items = [
-        l.asking_price          ? { label: "Asking Price",       value: l.asking_price,         cls: "price" } : null,
-        l.turnover              ? { label: "Turnover",           value: l.turnover,              cls: "" } : null,
-        l.ebitda_associate_led  ? { label: "EBITDA (Assoc.)",    value: l.ebitda_associate_led,  cls: "" } : null,
-        l.ebitda_owner_operated ? { label: "EBITDA (Owner)",     value: l.ebitda_owner_operated, cls: "" } : null,
-        l.uda_value             ? { label: "UDA Value",          value: l.uda_value,             cls: "" } : null,
-      ].filter(Boolean);
-
-      if (!items.length) return "";
-      return `<div class="card-financials">
-        ${items.map(i => `
-          <div class="financial-item">
-            <div class="financial-label">${esc(i.label)}</div>
-            <div class="financial-value ${i.cls}">${esc(i.value)}</div>
-          </div>`).join("")}
-      </div>`;
-    }
-
-    function buildHighlights(highlights) {
-      if (!highlights || !highlights.length) return "";
-      const shown = highlights.slice(0, 4);
-      return `<div class="card-highlights">
-        ${shown.map(h => `<div class="highlight-item">${esc(h)}</div>`).join("")}
-      </div>`;
-    }
-
-    function buildAgentSection(agent) {
-      if (!agent.name) return `<div></div>`;
-      if (agent.logo_url) {
-        return `<div class="agent-logo-wrap">
-          <img class="agent-logo" src="${esc(agent.logo_url)}" alt="${esc(agent.name)}" />
-        </div>`;
-      }
-      return `<div class="agent-logo-wrap"><span class="agent-name">${esc(agent.name)}</span></div>`;
-    }
-
-    function typeBadge(type) {
-      if (!type) return "";
-      const map = { "NHS": "nhs", "Private": "private", "Mixed": "mixed" };
-      const cls = map[type] || "nhs";
-      return `<span class="badge badge-${cls}">${esc(type)}</span>`;
-    }
-
-    function tenureBadge(tenure) {
-      if (!tenure) return "";
-      const cls = tenure === "Freehold" ? "freehold" : "leasehold";
-      return `<span class="badge badge-${cls}">${esc(tenure)}</span>`;
-    }
-
-    function placeholderImg() {
-      return `<div class="card-image-placeholder">🦷</div>`;
-    }
-
-    // ── Error state ────────────────────────────────────────────────────
-    function showError(msg) {
-      countEl.textContent = "—";
-      resultsLabel.textContent = "Unable to load listings";
-      grid.innerHTML = `
-        <div class="state-container">
-          <div class="state-icon">⚠️</div>
-          <div class="state-title">Directory temporarily unavailable</div>
-          <div class="state-desc">Please refresh the page to try again. If the problem persists, contact <a href="https://www.bizdentistry.com" target="_blank">bizdentistry.com</a>.</div>
-        </div>`;
-      console.error("[BizDentistry] API error:", msg);
-    }
-
-    // ── Utility: HTML escape ──────────────────────────────────────────
-    function esc(str) {
-      if (str == null) return "";
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
-
-    // ── Filter event listeners ─────────────────────────────────────────
-    regionSel.addEventListener("change", render);
-    typeSel.addEventListener("change", render);
-    tenureSel.addEventListener("change", render);
-    resetBtn.addEventListener("click", () => {
-      regionSel.value = "";
-      typeSel.value   = "";
-      tenureSel.value = "";
-      agentBoxes.querySelectorAll("input").forEach(i => { i.checked = true; });
+      buildFilters();
       render();
+      setLastUpdated();
+
+    } catch (err) {
+      showError(err.message);
+    }
+  }
+
+  // ── Build dynamic filter options ─────────────────────────────────────────
+  function buildFilters() {
+    const regions = [...new Set(allListings.map(l => l.region).filter(Boolean))].sort();
+    regions.forEach(r => {
+      const o = document.createElement("option");
+      o.value = r; o.textContent = r;
+      fRegion.appendChild(o);
     });
 
-    // ── Boot ───────────────────────────────────────────────────────────
-    loadData();
-  </script>
+    const brokers = [...new Set(allListings.map(l => l.broker_name).filter(Boolean))].sort();
+    brokers.forEach(b => {
+      const o = document.createElement("option");
+      o.value = b; o.textContent = b;
+      fBroker.appendChild(o);
+    });
+  }
+
+  function setLastUpdated() {
+    const dates = allListings.map(l => l.scraped_date).filter(Boolean);
+    if (dates.length) {
+      const latest = dates.sort().reverse()[0];
+      lastUpdated.textContent = "Data last updated: " + latest;
+    }
+  }
+
+  // ── Filter + render ───────────────────────────────────────────────────────
+  function filtered() {
+    return allListings.filter(l => {
+      if (fRegion.value && l.region !== fRegion.value) return false;
+      if (fType.value   && l.practice_type !== fType.value) return false;
+      if (fTenure.value && l.tenure !== fTenure.value) return false;
+      if (fBroker.value && l.broker_name !== fBroker.value) return false;
+      return true;
+    });
+  }
+
+  function render() {
+    const list = filtered();
+    countEl.textContent = list.length + " listing" + (list.length !== 1 ? "s" : "");
+    resultsBar.innerHTML = list.length
+      ? `Showing <strong>${list.length}</strong> dental practice${list.length !== 1 ? "s" : ""} for sale`
+      : "No listings match your filters.";
+
+    if (!list.length) {
+      grid.innerHTML = `<div class="state-box"><div class="icon">🔍</div><div class="title">No listings match your filters</div><div class="desc">Try adjusting or resetting the filters above.</div></div>`;
+      return;
+    }
+    grid.innerHTML = list.map(renderCard).join("");
+  }
+
+  // ── Card ─────────────────────────────────────────────────────────────────
+  function renderCard(l) {
+    const featured = l.is_featured ? `<div class="featured-badge">⭐ Featured</div>` : "";
+
+    const img = l.image_url
+      ? `<img class="card-img" src="${x(l.image_url)}" alt="${x(l.title)}" loading="lazy" onerror="this.outerHTML='<div class=card-img-placeholder>🦷</div>'" />`
+      : `<div class="card-img-placeholder">🦷</div>`;
+
+    const badges = [
+      typeBadge(l.practice_type),
+      tenureBadge(l.tenure),
+      l.num_surgeries ? `<span class="badge badge-surgeries">${x(l.num_surgeries)} ${+l.num_surgeries === 1 ? "surgery" : "surgeries"}</span>` : "",
+    ].filter(Boolean).join("");
+
+    const fins = [];
+    if (l.asking_price) fins.push({ label: "Asking Price", value: l.asking_price, cls: "price" });
+    if (l.turnover)     fins.push({ label: "Turnover",     value: l.turnover,     cls: "" });
+    if (l.ebitda)       fins.push({ label: "EBITDA",       value: l.ebitda,       cls: "" });
+    if (l.uda_value)    fins.push({ label: "UDA Value",    value: l.uda_value,    cls: "" });
+
+    const financials = fins.length ? `<div class="financials">${fins.map(f =>
+      `<div class="fin-item"><div class="fin-label">${x(f.label)}</div><div class="fin-value ${f.cls}">${x(f.value)}</div></div>`
+    ).join("")}</div>` : "";
+
+    const hlRaw = (l.highlights || "").split("|").map(s => s.trim()).filter(Boolean).slice(0, 4);
+    const hlHtml = hlRaw.length ? `<div class="highlights">${hlRaw.map(h => `<div class="highlight">${x(h)}</div>`).join("")}</div>` : "";
+
+    const brokerEl = l.broker_logo_url
+      ? `<img class="broker-logo" src="${x(l.broker_logo_url)}" alt="${x(l.broker_name || '')}" />`
+      : `<span class="broker-name">${x(l.broker_name || "")}</span>`;
+
+    return `
+<article class="card">
+  ${featured}
+  ${img}
+  <div class="card-body">
+    <div>
+      <div class="card-title">${x(l.title)}</div>
+      ${l.location ? `<div class="card-location">${x(l.location)}</div>` : ""}
+    </div>
+    ${badges ? `<div class="badges">${badges}</div>` : ""}
+    ${financials}
+    ${hlHtml}
+  </div>
+  <div class="card-footer">
+    ${brokerEl}
+    <button class="btn-enquire" onclick='openModal(${JSON.stringify(l)})'>Find Out More</button>
+  </div>
+</article>`;
+  }
+
+  function typeBadge(t) {
+    if (!t) return "";
+    const map = { NHS: "nhs", Private: "private", Mixed: "mixed" };
+    return `<span class="badge badge-${map[t] || 'nhs'}">${x(t)}</span>`;
+  }
+  function tenureBadge(t) {
+    if (!t) return "";
+    const cls = t === "Freehold" ? "freehold" : "leasehold";
+    return `<span class="badge badge-${cls}">${x(t)}</span>`;
+  }
+
+  // ── Modal ─────────────────────────────────────────────────────────────────
+  function openModal(listing) {
+    currentListing = listing;
+    modalTitle.textContent  = listing.title || "Find Out More";
+    modalBroker.textContent = listing.broker_name ? "Listed by " + listing.broker_name : "";
+    // Reset form
+    modalBody.innerHTML = modalBody.innerHTML; // force re-render (clears previous state)
+    showModalForm();
+    modal.classList.add("open");
+  }
+
+  function showModalForm() {
+    modalBody.innerHTML = `
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="f-name" placeholder="Dr Jane Smith" />
+          </div>
+          <div class="form-group">
+            <label>Phone *</label>
+            <input type="tel" id="f-phone" placeholder="07700 900000" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="f-email" placeholder="jane@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Message (optional)</label>
+          <textarea id="f-message" placeholder="I'm interested in this practice…"></textarea>
+        </div>
+        <div id="form-error" class="form-error" style="display:none"></div>
+        <button class="btn-submit" id="btn-submit" onclick="submitLead()">Send Enquiry</button>
+        <p style="font-size:11px;color:var(--bod-text-light);text-align:center;margin-top:-4px">Your details will be shared with the listing broker.</p>
+      </div>`;
+  }
+
+  modalClose.addEventListener("click", () => modal.classList.remove("open"));
+  modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("open"); });
+
+  async function submitLead() {
+    const name    = document.getElementById("f-name")?.value.trim();
+    const phone   = document.getElementById("f-phone")?.value.trim();
+    const email   = document.getElementById("f-email")?.value.trim();
+    const message = document.getElementById("f-message")?.value.trim();
+    const errEl   = document.getElementById("form-error");
+    const btn     = document.getElementById("btn-submit");
+
+    if (!name || !phone || !email) {
+      errEl.textContent = "Please fill in your name, phone and email.";
+      errEl.style.display = "block";
+      return;
+    }
+    if (!email.includes("@")) {
+      errEl.textContent = "Please enter a valid email address.";
+      errEl.style.display = "block";
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+    errEl.style.display = "none";
+
+    const payload = {
+      name, phone, email, message,
+      listing_id:    currentListing?.listing_id    || "",
+      listing_title: currentListing?.title         || "",
+      broker_name:   currentListing?.broker_name   || "",
+    };
+
+    try {
+      if (APPS_SCRIPT_URL === "PASTE_YOUR_APPS_SCRIPT_URL_HERE") {
+        // Dev mode: log to console instead of posting
+        console.log("[BizDentistry] Lead (Apps Script not yet configured):", payload);
+        showSuccess();
+        return;
+      }
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
+      showSuccess();
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = "Send Enquiry";
+      errEl.textContent = "Something went wrong. Please try again or email us directly.";
+      errEl.style.display = "block";
+    }
+  }
+
+  function showSuccess() {
+    modalBody.innerHTML = `
+      <div class="form-success">
+        <div class="icon">✅</div>
+        <h3>Enquiry sent!</h3>
+        <p>We'll be in touch shortly to connect you with the broker for this practice.</p>
+      </div>`;
+  }
+
+  // ── Error state ───────────────────────────────────────────────────────────
+  function showError(msg) {
+    countEl.textContent = "—";
+    resultsBar.textContent = "Unable to load listings";
+    grid.innerHTML = `<div class="state-box"><div class="icon">⚠️</div><div class="title">Directory temporarily unavailable</div><div class="desc">Please refresh to try again. If the problem persists, check that the Google Sheet is published and set to "Anyone with the link can view".</div></div>`;
+    console.error("[BizDentistry]", msg);
+  }
+
+  // ── XSS-safe escape ───────────────────────────────────────────────────────
+  function x(s) {
+    if (s == null) return "";
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+  }
+
+  // ── Filter listeners ──────────────────────────────────────────────────────
+  [fRegion, fType, fTenure, fBroker].forEach(el => el.addEventListener("change", render));
+  resetBtn.addEventListener("click", () => {
+    fRegion.value = ""; fType.value = ""; fTenure.value = ""; fBroker.value = "";
+    render();
+  });
+
+  // ── Boot ──────────────────────────────────────────────────────────────────
+  loadData();
+</script>
 </body>
 </html>
