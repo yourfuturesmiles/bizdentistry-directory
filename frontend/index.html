@@ -46,14 +46,12 @@
 
     /* ── Widget container — internal scroll so Wix iframe height is fixed ── */
     .widget {
-      height: 920px;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
     }
     .widget-scroll {
       flex: 1;
-      overflow-y: auto;
       overflow-x: hidden;
     }
 
@@ -570,6 +568,11 @@
     });
   }
 
+  function sendHeight() {
+    const h = document.body.scrollHeight;
+    window.parent.postMessage({ height: h }, "*");
+  }
+
   function render() {
     const list = filtered();
     countEl.textContent = list.length + " listing" + (list.length !== 1 ? "s" : "");
@@ -579,9 +582,11 @@
 
     if (!list.length) {
       grid.innerHTML = `<div class="state-box"><div class="icon">🔍</div><div class="title">No listings match your filters</div><div class="desc">Try adjusting or resetting the filters above.</div></div>`;
+      sendHeight();
       return;
     }
     grid.innerHTML = list.map(renderCard).join("");
+    setTimeout(sendHeight, 100);
   }
 
   // ── Card ─────────────────────────────────────────────────────────────────
