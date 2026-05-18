@@ -1,0 +1,11 @@
+listing_id,broker_name,title,location,region,practice_type,tenure,num_surgeries,asking_price,turnover,ebitda,listing_url,is_active,is_featured,broker_slug
+de-001,Dental Elite,Project Huxley,London,London,Private,Freehold,2,£1699000,c£1117000,c£247000,https://dentalelite.co.uk/practices/london-dental-practice-for-sale-22/,TRUE,TRUE,dental-elite
+de-002,Dental Elite,Project Nashville,North London,London,Private,Freehold,3,£1350000,c£1.1m,c£182000,https://dentalelite.co.uk/practices/dental-practice-for-sale-56/,FALSE,FALSE,dental-elite
+de-003,Dental Elite,Project Cabin,Lincolnshire,East Midlands,NHS,Freehold,3,£2110000,c£951000,c£324000,https://dentalelite.co.uk/practices/lincolnshire-dental-practice-for-sale-3/,FALSE,FALSE,dental-elite
+de-004,Dental Elite,Project Tatum,East Sussex,South East,Private,Freehold,4,£1310000,c£941000,c£201000,https://dentalelite.co.uk/practices/east-sussex-dental-practice-for-sale/,FALSE,FALSE,dental-elite
+de-005,Dental Elite,Project Essent,Greater Manchester,North West,Mixed,Freehold,4,£930000,c£666000,c£125000,https://dentalelite.co.uk/practices/greater-manchester-dental-practice-for-sale-2/,FALSE,FALSE,dental-elite
+de-006,Dental Elite,Project Soren,Hertfordshire,East of England,Private,Leasehold,3,£840000,c£588000,c£232000,https://dentalelite.co.uk/practices/hertfordshire-dental-practice-for-sale-2/,FALSE,FALSE,dental-elite
+de-007,Dental Elite,Project Taylor,Sutton Coldfield,West Midlands,Mixed,Freehold,3,£695000,c£347000,c£172000,https://dentalelite.co.uk/practices/west-midlands-dental-practice-for-sale-7/,FALSE,FALSE,dental-elite
+de-008,Dental Elite,Project Delta,Berkshire,South East,Private,Leasehold,,£600000,c£488000,c£269000,https://dentalelite.co.uk/practices/dental-practice-for-sale-40/,FALSE,FALSE,dental-elite
+de-009,Dental Elite,Project Margin,Isle of Wight,South East,Private,Freehold,3,£520000,c£1.1m,c£100000,https://dentalelite.co.uk/practices/isle-of-wight-dental-practice-for-sale/,FALSE,FALSE,dental-elite
+de-010,Dental Elite,Project Gliss,County Durham,North East,NHS,Leasehold,2,£439000,c£452000,c£110000,https://dentalelite.co.uk/practices/county-durham-dental-practice-for-sale/,FALSE,FALSE,dental-elite

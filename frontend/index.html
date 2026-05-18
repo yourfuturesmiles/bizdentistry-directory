@@ -508,7 +508,7 @@
             practice_type:     get("practice_type"),
             tenure:            get("tenure"),
             num_surgeries:     get("num_surgeries"),
-            asking_price:      get("asking_price"),
+            asking_price:      formatPrice(get("asking_price")),
             turnover:          get("turnover"),
             ebitda:            get("ebitda"),
             uda_value:         get("uda_value"),
@@ -755,6 +755,15 @@
   }
 
   // ── XSS-safe escape ───────────────────────────────────────────────────────
+  function formatPrice(v) {
+    if (!v) return null;
+    const s = String(v).replace(/,/g, "");
+    if (s.startsWith("£")) return s;
+    const n = parseFloat(s);
+    if (!isNaN(n)) return "£" + n.toLocaleString("en-GB");
+    return v;
+  }
+
   function x(s) {
     if (s == null) return "";
     return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
