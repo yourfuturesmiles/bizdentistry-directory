@@ -556,14 +556,32 @@
             return (cell && cell.v !== null) ? String(cell.v).trim() : null;
           };
           const sp = s => (s || "").replace(/^(Location|Practice|Tenure|Turnover|Asking Price|Price Label):\s*/i, "").trim();
+          const loc = sp(get("location"));
+          const derivedRegion = (() => {
+            const r = sp(get("region")); if (r) return r;
+            const l = loc.toLowerCase();
+            if (l.includes("london"))                                                         return "London";
+            if (l.includes("manchester")||l.includes("lancashire")||l.includes("cheshire")||l.includes("merseyside")||l.includes("cumbria")) return "North West";
+            if (l.includes("yorkshire")||l.includes("leeds")||l.includes("sheffield")||l.includes("hull")||l.includes("bradford"))           return "Yorkshire";
+            if (l.includes("birmingham")||l.includes("midlands")||l.includes("coventry")||l.includes("stafford")||l.includes("warwick"))     return "West Midlands";
+            if (l.includes("nottingham")||l.includes("derby")||l.includes("leicester")||l.includes("lincolnshire")||l.includes("northampton")) return "East Midlands";
+            if (l.includes("norfolk")||l.includes("suffolk")||l.includes("cambridge")||l.includes("essex")||l.includes("hertford")||l.includes("bedford")||l.includes("middlesex")) return "East of England";
+            if (l.includes("surrey")||l.includes("kent")||l.includes("sussex")||l.includes("hampshire")||l.includes("berkshire")||l.includes("oxford")||l.includes("buckingham")||l.includes("isle of wight")) return "South East";
+            if (l.includes("bristol")||l.includes("somerset")||l.includes("devon")||l.includes("cornwall")||l.includes("dorset")||l.includes("gloucester")||l.includes("wiltshire")) return "South West";
+            if (l.includes("newcastle")||l.includes("durham")||l.includes("sunderland")||l.includes("northumberland")) return "North East";
+            if (l.includes("glasgow")||l.includes("edinburgh")||l.includes("lanarkshire")||l.includes("aberdeen")||l.includes("scotland")||l.includes("dundee")) return "Scotland";
+            if (l.includes("wales")||l.includes("cardiff")||l.includes("swansea"))           return "Wales";
+            if (l.includes("belfast")||l.includes("northern ireland"))                       return "Northern Ireland";
+            return "";
+          })();
           return {
             listing_id:        get("listing_id"),
             broker_name:       get("broker_name"),
             broker_slug:       get("broker_slug"),
             broker_logo_url:   get("broker_logo_url"),
             title:             get("title"),
-            location:          sp(get("location")),
-            region:            sp(get("region")),
+            location:          loc,
+            region:            derivedRegion,
             practice_type:     sp(get("practice_type")),
             tenure:            sp(get("tenure")),
             num_surgeries:     get("num_surgeries"),
@@ -580,7 +598,12 @@
             status:            get("browse_status") || "",
           };
         })
-        .filter(l => l.is_active && l.title && !l.status.toUpperCase().includes("SOLD STC") && !l.status.toUpperCase().includes("UNDER OFFER"));
+        .filter(l => l.is_active && l.listing_id && l.title && !l.status.toUpperCase().includes("SOLD STC") && !l.status.toUpperCase().includes("UNDER OFFER"));
+
+      // Deduplicate by listing_id — keep the last (most recently scraped) occurrence
+      const seen = new Map();
+      allListings.forEach(l => { if (l.listing_id) seen.set(l.listing_id, l); });
+      allListings = [...seen.values()];
 
       // Sort: featured first, then by title
       allListings.sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
