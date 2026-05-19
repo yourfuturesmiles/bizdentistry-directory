@@ -555,16 +555,17 @@
             const cell = r.c[i];
             return (cell && cell.v !== null) ? String(cell.v).trim() : null;
           };
+          const sp = s => (s || "").replace(/^(Location|Practice|Tenure|Turnover|Asking Price|Price Label):\s*/i, "").trim();
           return {
             listing_id:        get("listing_id"),
             broker_name:       get("broker_name"),
             broker_slug:       get("broker_slug"),
             broker_logo_url:   get("broker_logo_url"),
             title:             get("title"),
-            location:          get("location"),
-            region:            get("region"),
-            practice_type:     get("practice_type"),
-            tenure:            get("tenure"),
+            location:          sp(get("location")),
+            region:            sp(get("region")),
+            practice_type:     sp(get("practice_type")),
+            tenure:            sp(get("tenure")),
             num_surgeries:     get("num_surgeries"),
             asking_price:      formatPrice(get("asking_price")),
             turnover:          get("turnover"),
@@ -576,9 +577,10 @@
             is_featured:       (get("is_featured") || "").toUpperCase() === "TRUE",
             is_active:         (get("is_active") || "TRUE").toUpperCase() !== "FALSE",
             scraped_date:      get("scraped_date"),
+            status:            get("browse_status") || "",
           };
         })
-        .filter(l => l.is_active && l.title);
+        .filter(l => l.is_active && l.title && !l.status.toUpperCase().includes("SOLD STC") && !l.status.toUpperCase().includes("UNDER OFFER"));
 
       // Sort: featured first, then by title
       allListings.sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
@@ -664,9 +666,10 @@
       l.num_surgeries ? `<span class="badge badge-surgeries">${x(l.num_surgeries)} ${+l.num_surgeries === 1 ? "surgery" : "surgeries"}</span>` : "",
     ].filter(Boolean).join("");
 
+    const isFinancial = v => v && /[£\d]/.test(v.slice(0, 4));
     const fins = [];
-    if (l.turnover)  fins.push({ label: "Turnover",  value: l.turnover,  cls: "" });
-    if (l.ebitda)    fins.push({ label: "EBITDA",    value: l.ebitda,    cls: "" });
+    if (l.turnover && isFinancial(l.turnover))  fins.push({ label: "Turnover",  value: l.turnover,  cls: "" });
+    if (l.ebitda   && isFinancial(l.ebitda))    fins.push({ label: "EBITDA",    value: l.ebitda,    cls: "" });
     if (l.uda_value) fins.push({ label: "UDA Value", value: l.uda_value, cls: "" });
 
     const financials = fins.length ? `<div class="financials">${fins.map(f =>
@@ -675,8 +678,8 @@
 
     let hlRaw = (l.highlights || "").split("|").map(s => s.trim()).filter(Boolean).slice(0, 5);
     if (!hlRaw.length) {
-      if (l.turnover)      hlRaw.push("Turnover " + l.turnover);
-      if (l.ebitda)        hlRaw.push("EBITDA " + l.ebitda);
+      if (l.turnover && isFinancial(l.turnover))  hlRaw.push("Turnover " + l.turnover);
+      if (l.ebitda   && isFinancial(l.ebitda))    hlRaw.push("EBITDA " + l.ebitda);
       if (l.num_surgeries) hlRaw.push(l.num_surgeries + " surgeries");
       if (l.tenure)        hlRaw.push(l.tenure + " property");
       if (l.uda_value)     hlRaw.push("UDA rate " + l.uda_value);
