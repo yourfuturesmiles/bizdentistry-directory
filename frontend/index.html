@@ -5,34 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dental Practices for Sale — Business of Dentistry</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bod-dark:         #1a1a2e;
-      --bod-dark-mid:     #2a2a4a;
-      --bod-accent:       #c9a84c;
+      --bod-navy:         #1b396e;
+      --bod-navy-mid:     #22438a;
+      --bod-navy-deep:    #122952;
+      --bod-green:        #7ed957;
+      --bod-green-dark:   #62c03d;
+      --bod-purple:       #982986;
+      --bod-lilac:        #eb9de3;
       --bod-white:        #ffffff;
-      --bod-light-bg:     #f7f7f9;
-      --bod-border:       #e2e2ea;
-      --bod-text:         #1a1a2e;
-      --bod-text-mid:     #4a4a6a;
-      --bod-text-light:   #7a7a9a;
-      --bod-nhs-blue:     #005eb8;
-      --bod-nhs-bg:       #e8f1fb;
-      --bod-private-green:#1a7a40;
-      --bod-private-bg:   #e8f5ee;
-      --bod-mixed-orange: #b85000;
-      --bod-mixed-bg:     #fdf0e8;
-      --bod-freehold:     #5a3e9e;
-      --bod-freehold-bg:  #f0ecfb;
-      --font-main: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 14px;
-      --shadow-card: 0 2px 8px rgba(26,26,46,0.08);
-      --shadow-card-hover: 0 6px 20px rgba(26,26,46,0.14);
+      --bod-light-bg:     #f0f4fa;
+      --bod-border:       #d4dff0;
+      --bod-text:         #1b396e;
+      --bod-text-mid:     #4a608a;
+      --bod-text-light:   #7a90b0;
+      --font-main:        'Mulish', 'Helvetica Neue', Arial, sans-serif;
+      --radius-sm:        6px;
+      --radius-md:        10px;
+      --radius-lg:        14px;
+      --shadow-card:      0 2px 12px rgba(27,57,110,0.10);
+      --shadow-card-hover:0 8px 32px rgba(27,57,110,0.20);
     }
 
     body {
@@ -44,46 +40,61 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Widget container — internal scroll so Wix iframe height is fixed ── */
-    .widget {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .widget-scroll {
-      flex: 1;
-      overflow-x: hidden;
-    }
+    .widget { min-height: 100vh; display: flex; flex-direction: column; }
+    .widget-scroll { flex: 1; overflow-x: hidden; }
 
     /* ── Header ── */
     .header {
-      background: var(--bod-dark);
-      padding: 16px 20px;
+      background: var(--bod-navy);
+      padding: 0 20px;
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: space-between;
       gap: 12px;
       flex-shrink: 0;
+      position: relative;
+    }
+    .header::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--bod-green);
+    }
+    .header-left {
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
     .header-left h1 {
       color: var(--bod-white);
-      font-size: 17px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
     }
     .header-left p {
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.5);
       font-size: 11px;
-      margin-top: 1px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 0;
     }
     .header-count {
-      background: var(--bod-accent);
-      color: var(--bod-dark);
+      background: var(--bod-green);
+      color: var(--bod-navy);
       font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
+      font-weight: 900;
+      padding: 5px 12px;
       border-radius: 20px;
       white-space: nowrap;
-      flex-shrink: 0;
+      letter-spacing: 0.3px;
     }
 
     /* ── Filters ── */
@@ -104,83 +115,88 @@
     }
     .filter-group label {
       font-size: 10px;
-      font-weight: 600;
+      font-weight: 800;
       color: var(--bod-text-light);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
     }
     .filter-group select {
       background: var(--bod-light-bg);
-      border: 1px solid var(--bod-border);
+      border: 1.5px solid var(--bod-border);
       border-radius: var(--radius-sm);
-      padding: 6px 28px 6px 10px;
+      padding: 7px 28px 7px 10px;
       font-family: var(--font-main);
       font-size: 13px;
+      font-weight: 600;
       color: var(--bod-text);
       cursor: pointer;
       outline: none;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%237a7a9a' d='M5 7L0 2h10z'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%237a90b0' d='M5 7L0 2h10z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 10px center;
       min-width: 130px;
+      transition: border-color 0.15s;
     }
-    .filter-group select:focus { border-color: var(--bod-accent); }
+    .filter-group select:focus { border-color: var(--bod-navy); outline: none; }
     .filter-reset {
       background: none;
-      border: 1px solid var(--bod-border);
+      border: 1.5px solid var(--bod-border);
       border-radius: var(--radius-sm);
-      padding: 6px 12px;
+      padding: 7px 14px;
       font-family: var(--font-main);
       font-size: 12px;
+      font-weight: 700;
       color: var(--bod-text-light);
       cursor: pointer;
       align-self: flex-end;
+      transition: border-color 0.15s, color 0.15s;
     }
-    .filter-reset:hover { border-color: var(--bod-text-mid); color: var(--bod-text-mid); }
+    .filter-reset:hover { border-color: var(--bod-navy); color: var(--bod-navy); }
 
     /* ── Results bar ── */
     .results-bar {
       padding: 10px 20px;
       font-size: 12px;
+      font-weight: 600;
       color: var(--bod-text-light);
       flex-shrink: 0;
     }
-    .results-bar strong { color: var(--bod-text); }
+    .results-bar strong { color: var(--bod-navy); font-weight: 800; }
 
     /* ── Grid ── */
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      gap: 16px;
       padding: 0 20px 24px;
     }
 
     /* ── Card ── */
     .card {
-      background: var(--bod-dark);
-      border: 1px solid rgba(201,168,76,0.18);
+      background: var(--bod-navy);
+      border: 1.5px solid rgba(126,217,87,0.15);
       border-radius: var(--radius-lg);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       position: relative;
       transition: box-shadow 0.25s, transform 0.2s, border-color 0.2s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 20px rgba(27,57,110,0.3);
     }
     .card:hover {
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 36px rgba(27,57,110,0.45);
       transform: translateY(-3px);
-      border-color: rgba(201,168,76,0.5);
+      border-color: rgba(126,217,87,0.5);
     }
 
     .featured-badge {
       position: absolute;
       top: 12px; left: 12px;
-      background: var(--bod-accent);
-      color: var(--bod-dark);
+      background: var(--bod-green);
+      color: var(--bod-navy);
       font-size: 9px;
-      font-weight: 700;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 1px;
       padding: 4px 9px;
@@ -188,13 +204,10 @@
       z-index: 2;
     }
 
-    .card-img-wrap {
-      position: relative;
-      overflow: hidden;
-    }
+    .card-img-wrap { position: relative; overflow: hidden; }
     .card-img {
       width: 100%;
-      height: 170px;
+      height: 160px;
       object-fit: cover;
       display: block;
       transition: transform 0.4s ease;
@@ -203,23 +216,24 @@
     .card-img-overlay {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 60%;
-      background: linear-gradient(to top, rgba(26,26,46,0.95) 0%, transparent 100%);
+      height: 65%;
+      background: linear-gradient(to top, rgba(18,41,82,0.96) 0%, transparent 100%);
       pointer-events: none;
     }
     .card-price-overlay {
       position: absolute;
       bottom: 12px; left: 14px;
       font-size: 18px;
-      font-weight: 700;
-      color: var(--bod-accent);
+      font-weight: 900;
+      color: var(--bod-green);
       letter-spacing: -0.3px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
     }
+
     .card-img-placeholder {
       width: 100%;
-      height: 170px;
-      background: linear-gradient(135deg, #0d0d1e 0%, #1a1a3a 60%, #0f1628 100%);
+      height: 160px;
+      background: linear-gradient(135deg, var(--bod-navy-deep) 0%, var(--bod-navy) 60%, #1e3d77 100%);
       position: relative;
       overflow: hidden;
     }
@@ -229,78 +243,107 @@
       inset: 0;
       background-image: repeating-linear-gradient(
         45deg,
-        rgba(201,168,76,0.03) 0px,
-        rgba(201,168,76,0.03) 1px,
+        rgba(126,217,87,0.04) 0px,
+        rgba(126,217,87,0.04) 1px,
         transparent 1px,
-        transparent 12px
+        transparent 14px
       );
     }
     .card-img-placeholder::after {
       content: "";
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 60%;
-      background: linear-gradient(to top, rgba(13,13,30,0.9) 0%, transparent 100%);
+      height: 65%;
+      background: linear-gradient(to top, rgba(18,41,82,0.9) 0%, transparent 100%);
     }
     .card-placeholder-price {
       position: absolute;
       bottom: 12px; left: 14px;
       font-size: 18px;
-      font-weight: 700;
-      color: var(--bod-accent);
+      font-weight: 900;
+      color: var(--bod-green);
+      z-index: 1;
     }
 
-    .card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .card-body { padding: 14px 15px; flex: 1; display: flex; flex-direction: column; gap: 9px; }
 
-    .card-title { font-size: 15px; font-weight: 700; line-height: 1.3; color: #ffffff; }
-    .card-location { font-size: 12px; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 4px; }
-    .card-location::before { content: "◎"; font-size: 10px; color: var(--bod-accent); }
+    .card-title { font-size: 14px; font-weight: 800; line-height: 1.3; color: #ffffff; }
+    .card-location {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .card-location::before { content: "◎"; font-size: 10px; color: var(--bod-green); }
 
     .badges { display: flex; flex-wrap: wrap; gap: 5px; }
-    .badge { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.3px; }
-    .badge-nhs       { background: rgba(0,94,184,0.25);  color: #5aabff; border: 1px solid rgba(0,94,184,0.4); }
-    .badge-private   { background: rgba(46,125,50,0.25); color: #6fcf7a; border: 1px solid rgba(46,125,50,0.4); }
-    .badge-mixed     { background: rgba(230,81,0,0.25);  color: #ffab70; border: 1px solid rgba(230,81,0,0.4); }
-    .badge-freehold  { background: rgba(201,168,76,0.15); color: var(--bod-accent); border: 1px solid rgba(201,168,76,0.3); }
-    .badge-leasehold { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.12); }
-    .badge-surgeries { background: rgba(100,120,255,0.2); color: #99aaff; border: 1px solid rgba(100,120,255,0.35); }
+    .badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.3px;
+    }
+    .badge-nhs      { background: rgba(152,41,134,0.25); color: #e06dd0; border: 1px solid rgba(152,41,134,0.4); }
+    .badge-private  { background: rgba(126,217,87,0.2);  color: #7ed957; border: 1px solid rgba(126,217,87,0.4); }
+    .badge-mixed    { background: rgba(235,157,227,0.15);color: #eb9de3; border: 1px solid rgba(235,157,227,0.35); }
+    .badge-freehold { background: rgba(126,217,87,0.15); color: var(--bod-green); border: 1px solid rgba(126,217,87,0.3); }
+    .badge-leasehold{ background: rgba(255,255,255,0.07);color: rgba(255,255,255,0.45); border: 1px solid rgba(255,255,255,0.12); }
+    .badge-surgeries{ background: rgba(235,157,227,0.15);color: #eb9de3; border: 1px solid rgba(235,157,227,0.3); }
 
     .financials { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .fin-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 8px 10px; }
-    .fin-label { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 2px; }
-    .fin-value { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85); }
-    .fin-value.price { font-size: 13px; color: var(--bod-accent); }
+    .fin-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+    }
+    .fin-label { font-size: 9px; font-weight: 800; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 2px; }
+    .fin-value { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.85); }
 
-    .highlights { display: flex; flex-direction: column; gap: 5px; padding-top: 2px; }
-    .highlight { font-size: 11.5px; color: rgba(255,255,255,0.55); display: flex; gap: 7px; align-items: flex-start; line-height: 1.4; }
-    .highlight::before { content: "—"; color: var(--bod-accent); font-size: 12px; line-height: 1.4; flex-shrink: 0; font-weight: 700; }
+    .highlights { display: flex; flex-direction: column; gap: 5px; padding-top: 1px; }
+    .highlight {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      display: flex;
+      gap: 7px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+    .highlight::before { content: "—"; color: var(--bod-green); font-size: 12px; line-height: 1.4; flex-shrink: 0; font-weight: 900; }
 
     .card-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 15px;
       border-top: 1px solid rgba(255,255,255,0.07);
-      background: rgba(0,0,0,0.2);
+      background: rgba(0,0,0,0.15);
       gap: 8px;
     }
-    .broker-name { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 500; }
-    .broker-logo { height: 22px; max-width: 90px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.6; }
+    .broker-name { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); }
+    .broker-logo { height: 22px; max-width: 90px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.55; transition: opacity 0.2s; }
     .card:hover .broker-logo { opacity: 0.9; }
+
     .btn-enquire {
-      background: var(--bod-accent);
-      color: var(--bod-dark);
+      background: var(--bod-green);
+      color: var(--bod-navy);
       font-family: var(--font-main);
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 900;
       padding: 7px 14px;
       border-radius: var(--radius-sm);
       border: none;
       cursor: pointer;
       white-space: nowrap;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
       transition: background 0.15s, transform 0.1s;
     }
-    .btn-enquire:hover { background: #d4b460; transform: scale(1.03); }
+    .btn-enquire:hover { background: var(--bod-green-dark); transform: scale(1.03); }
 
     /* ── States ── */
     .state-box {
@@ -309,90 +352,127 @@
       padding: 50px 20px; text-align: center; gap: 10px;
     }
     .state-box .icon { font-size: 32px; }
-    .state-box .title { font-size: 15px; font-weight: 700; }
+    .state-box .title { font-size: 15px; font-weight: 800; color: var(--bod-navy); }
     .state-box .desc { font-size: 12px; color: var(--bod-text-light); max-width: 280px; }
 
-    /* Skeleton */
-    .skel { background: var(--bod-dark); border: 1px solid rgba(201,168,76,0.1); border-radius: var(--radius-lg); overflow: hidden; }
-    .skel-img { width: 100%; height: 170px; background: rgba(255,255,255,0.05); }
+    /* ── Skeleton ── */
+    .skel {
+      background: var(--bod-navy);
+      border: 1.5px solid rgba(126,217,87,0.1);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .skel-img { width: 100%; height: 160px; background: rgba(255,255,255,0.06); }
     .skel-body { padding: 14px; display: flex; flex-direction: column; gap: 9px; }
     .skel-line {
       height: 11px; border-radius: 4px;
-      background: linear-gradient(90deg, #ebebf0 25%, #f5f5f8 50%, #ebebf0 75%);
+      background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.06) 75%);
       background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
+      animation: shimmer 1.6s infinite;
     }
     .w100 { width: 100%; } .w75 { width: 75%; } .w50 { width: 50%; } .w33 { width: 33%; }
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
     /* ── Footer ── */
     .footer {
-      background: var(--bod-dark); padding: 12px 20px; text-align: center;
+      background: var(--bod-navy);
+      padding: 12px 20px;
+      text-align: center;
       flex-shrink: 0;
+      border-top: 2px solid rgba(126,217,87,0.2);
     }
-    .footer a { color: rgba(255,255,255,0.35); font-size: 11px; text-decoration: none; }
-    .footer a:hover { color: var(--bod-accent); }
-    .footer-updated { color: rgba(255,255,255,0.25); font-size: 10px; margin-top: 2px; }
+    .footer a { color: rgba(255,255,255,0.35); font-size: 11px; font-weight: 600; text-decoration: none; transition: color 0.15s; }
+    .footer a:hover { color: var(--bod-green); }
+    .footer-updated { color: rgba(255,255,255,0.25); font-size: 10px; margin-top: 3px; font-weight: 600; }
 
     /* ── Modal ── */
     .modal-overlay {
       display: none; position: fixed; inset: 0;
-      background: rgba(10,10,30,0.6); z-index: 100;
+      background: rgba(18,41,82,0.65);
+      backdrop-filter: blur(3px);
+      z-index: 100;
       align-items: center; justify-content: center; padding: 20px;
     }
     .modal-overlay.open { display: flex; }
     .modal {
-      background: var(--bod-white); border-radius: var(--radius-lg);
+      background: var(--bod-white);
+      border-radius: var(--radius-lg);
       width: 100%; max-width: 440px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      box-shadow: 0 24px 64px rgba(18,41,82,0.35);
       overflow: hidden;
     }
     .modal-header {
-      background: var(--bod-dark); padding: 16px 20px;
+      background: var(--bod-navy);
+      padding: 16px 20px;
       display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+      border-bottom: 3px solid var(--bod-green);
     }
-    .modal-header h2 { color: var(--bod-white); font-size: 15px; font-weight: 700; line-height: 1.3; }
-    .modal-header p { color: rgba(255,255,255,0.5); font-size: 11px; margin-top: 3px; }
+    .modal-header h2 { color: var(--bod-white); font-size: 15px; font-weight: 800; line-height: 1.3; }
+    .modal-header p { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 600; margin-top: 3px; }
     .modal-close {
-      background: none; border: none; color: rgba(255,255,255,0.5);
+      background: none; border: none;
+      color: rgba(255,255,255,0.5);
       font-size: 20px; cursor: pointer; line-height: 1; padding: 0; flex-shrink: 0;
+      transition: color 0.15s;
     }
     .modal-close:hover { color: var(--bod-white); }
     .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
     .form-group { display: flex; flex-direction: column; gap: 4px; }
-    .form-group label { font-size: 11px; font-weight: 600; color: var(--bod-text-mid); }
+    .form-group label { font-size: 11px; font-weight: 800; color: var(--bod-text-mid); text-transform: uppercase; letter-spacing: 0.5px; }
     .form-group input,
     .form-group textarea {
-      border: 1px solid var(--bod-border); border-radius: var(--radius-sm);
-      padding: 9px 12px; font-family: var(--font-main); font-size: 13px;
-      color: var(--bod-text); outline: none; width: 100%;
+      border: 1.5px solid var(--bod-border);
+      border-radius: var(--radius-sm);
+      padding: 9px 12px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--bod-text);
+      outline: none;
+      width: 100%;
       transition: border-color 0.15s;
     }
     .form-group input:focus,
-    .form-group textarea:focus { border-color: var(--bod-accent); }
+    .form-group textarea:focus { border-color: var(--bod-navy); }
     .form-group textarea { resize: vertical; min-height: 80px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .btn-submit {
-      background: var(--bod-dark); color: var(--bod-white);
-      border: none; border-radius: var(--radius-sm);
-      padding: 11px; font-family: var(--font-main); font-size: 13px; font-weight: 600;
-      cursor: pointer; width: 100%; transition: background 0.15s;
+      background: var(--bod-green);
+      color: var(--bod-navy);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.15s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .btn-submit:hover { background: var(--bod-dark-mid); }
-    .btn-submit:disabled { background: var(--bod-text-light); cursor: not-allowed; }
+    .btn-submit:hover { background: var(--bod-green-dark); }
+    .btn-submit:disabled { background: var(--bod-text-light); cursor: not-allowed; color: white; }
     .form-success {
-      text-align: center; padding: 30px 20px;
+      text-align: center; padding: 32px 20px;
       display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
-    .form-success .icon { font-size: 36px; }
-    .form-success h3 { font-size: 16px; font-weight: 700; }
-    .form-success p { font-size: 13px; color: var(--bod-text-mid); }
-    .form-error { font-size: 12px; color: #c0392b; padding: 8px 12px; background: #fdf2f2; border-radius: var(--radius-sm); }
+    .form-success .icon { font-size: 40px; }
+    .form-success h3 { font-size: 18px; font-weight: 900; color: var(--bod-navy); }
+    .form-success p { font-size: 13px; font-weight: 600; color: var(--bod-text-mid); }
+    .form-error {
+      font-size: 12px; font-weight: 700;
+      color: #c0392b;
+      padding: 9px 12px;
+      background: #fdf2f2;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid #c0392b;
+    }
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
       .grid { grid-template-columns: 1fr; padding: 0 12px 16px; }
-      .header { padding: 12px; }
+      .header { padding: 0 12px; }
       .filters { padding: 10px 12px; }
       .results-bar { padding: 8px 12px; }
       .form-row { grid-template-columns: 1fr; }
@@ -408,9 +488,11 @@
   <header class="header">
     <div class="header-left">
       <h1>Dental Practices for Sale</h1>
-      <p>Powered by The Business of Dentistry</p>
+      <p>Business of Dentistry Directory</p>
     </div>
-    <div class="header-count" id="listing-count">Loading…</div>
+    <div class="header-right">
+      <div class="header-count" id="listing-count">Loading…</div>
+    </div>
   </header>
 
   <!-- Filters -->
@@ -448,13 +530,11 @@
 
   <!-- Scrollable content -->
   <div class="widget-scroll">
-    <!-- Grid -->
     <main class="grid" id="grid">
       <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w75"></div><div class="skel-line w50"></div><div class="skel-line w100"></div><div class="skel-line w33"></div></div></div>
       <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line w75"></div><div class="skel-line w50"></div><div class="skel-line w100"></div><div class="skel-line w33"></div></div></div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
       <div><a href="https://www.bizdentistry.com" target="_blank" rel="noopener">© The Business of Dentistry — bizdentistry.com</a></div>
       <div class="footer-updated" id="last-updated"></div>
@@ -494,25 +574,20 @@
         </div>
         <div id="form-error" class="form-error" style="display:none"></div>
         <button class="btn-submit" id="btn-submit">Send Enquiry</button>
-        <p style="font-size:11px;color:var(--bod-text-light);text-align:center">Your details will be shared with the listing broker.</p>
+        <p style="font-size:11px;font-weight:600;color:var(--bod-text-light);text-align:center">Your details will be shared with the listing broker.</p>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // ── Config ─────────────────────────────────────────────────────────────
-  const SHEET_ID     = "1_hg1pnD_C8xGh4Y8Aisdio1MutMNrZ5pj5KfLYRtGQY";
-  const SHEET_URL    = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=listings`;
-
-  // Replace with your Apps Script /exec URL after deploying the script:
+  const SHEET_ID  = "1_hg1pnD_C8xGh4Y8Aisdio1MutMNrZ5pj5KfLYRtGQY";
+  const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=listings`;
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyI7-iiIVx21r_aH-mfBFwY4y5p_T8Z96YshzY1JHA9pr2fO962M16_lSSjZX96PBvkTw/exec";
 
-  // ── State ───────────────────────────────────────────────────────────────
   let allListings   = [];
   let currentListing = null;
 
-  // ── DOM ─────────────────────────────────────────────────────────────────
   const grid        = document.getElementById("grid");
   const countEl     = document.getElementById("listing-count");
   const resultsBar  = document.getElementById("results-bar");
@@ -527,25 +602,16 @@
   const modalBroker = document.getElementById("modal-broker");
   const modalBody   = document.getElementById("modal-body");
   const modalClose  = document.getElementById("modal-close");
-  const btnSubmit   = document.getElementById("btn-submit");
-  const formError   = document.getElementById("form-error");
 
-  // ── Load data from Google Sheets ────────────────────────────────────────
   async function loadData() {
     try {
       const res  = await fetch(SHEET_URL);
       const text = await res.text();
-
-      // Strip Google's non-JSON wrapper
       const json = JSON.parse(text.slice(47, -2));
 
-      // Build column name → index map
       const cols = {};
-      json.table.cols.forEach((c, i) => {
-        if (c.label) cols[c.label.trim()] = i;
-      });
+      json.table.cols.forEach((c, i) => { if (c.label) cols[c.label.trim()] = i; });
 
-      // Parse rows
       const rows = json.table.rows || [];
       allListings = rows
         .map(r => {
@@ -575,49 +641,44 @@
             return "";
           })();
           return {
-            listing_id:        get("listing_id"),
-            broker_name:       get("broker_name"),
-            broker_slug:       get("broker_slug"),
-            broker_logo_url:   get("broker_logo_url"),
-            title:             get("title"),
-            location:          loc,
-            region:            derivedRegion,
-            practice_type:     sp(get("practice_type")),
-            tenure:            sp(get("tenure")),
-            num_surgeries:     get("num_surgeries"),
-            asking_price:      formatPrice(get("asking_price")),
-            turnover:          (get("turnover") || "").replace(/^Turnover\s*/i, "").trim() || null,
-            ebitda:            (get("ebitda")   || "").replace(/^(EBITDA|FMT|Profit)\s*/i, "").trim() || null,
-            uda_value:         get("uda_value"),
-            highlights:        get("highlights") || [get("description"), get("additional_feature"), get("investment_detail"), get("management_detail")].filter(Boolean).join("|"),
-            listing_url:       get("listing_url"),
-            image_url:         get("image_url"),
-            is_featured:       (get("is_featured") || "").toUpperCase() === "TRUE",
-            is_active:         (get("is_active") || "TRUE").toUpperCase() !== "FALSE",
-            scraped_date:      get("scraped_date"),
-            status:            get("browse_status") || "",
+            listing_id:      get("listing_id"),
+            broker_name:     get("broker_name"),
+            broker_slug:     get("broker_slug"),
+            broker_logo_url: get("broker_logo_url"),
+            title:           get("title"),
+            location:        loc,
+            region:          derivedRegion,
+            practice_type:   sp(get("practice_type")),
+            tenure:          sp(get("tenure")),
+            num_surgeries:   get("num_surgeries"),
+            asking_price:    formatPrice(get("asking_price")),
+            turnover:        (get("turnover") || "").replace(/^Turnover\s*/i, "").trim() || null,
+            ebitda:          (get("ebitda")   || "").replace(/^(EBITDA|FMT|Profit)\s*/i, "").trim() || null,
+            uda_value:       get("uda_value"),
+            highlights:      get("highlights") || [get("description"), get("additional_feature"), get("investment_detail"), get("management_detail")].filter(Boolean).join("|"),
+            listing_url:     get("listing_url"),
+            image_url:       get("image_url"),
+            is_featured:     (get("is_featured") || "").toUpperCase() === "TRUE",
+            is_active:       (get("is_active") || "TRUE").toUpperCase() !== "FALSE",
+            scraped_date:    get("scraped_date"),
+            status:          get("browse_status") || "",
           };
         })
         .filter(l => l.is_active && l.listing_id && l.title && !l.status.toUpperCase().includes("SOLD STC") && !l.status.toUpperCase().includes("UNDER OFFER"));
 
-      // Deduplicate by listing_id — keep the last (most recently scraped) occurrence
       const seen = new Map();
       allListings.forEach(l => { if (l.listing_id) seen.set(l.listing_id, l); });
       allListings = [...seen.values()];
-
-      // Sort: featured first, then by title
       allListings.sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
 
       buildFilters();
       render();
       setLastUpdated();
-
     } catch (err) {
       showError(err.message);
     }
   }
 
-  // ── Build dynamic filter options ─────────────────────────────────────────
   function buildFilters() {
     const regions = [...new Set(allListings.map(l => l.region).filter(Boolean))].sort();
     regions.forEach(r => {
@@ -625,7 +686,6 @@
       o.value = r; o.textContent = r;
       fRegion.appendChild(o);
     });
-
     const brokers = [...new Set(allListings.map(l => l.broker_name).filter(Boolean))].sort();
     brokers.forEach(b => {
       const o = document.createElement("option");
@@ -637,12 +697,10 @@
   function setLastUpdated() {
     const dates = allListings.map(l => l.scraped_date).filter(Boolean);
     if (dates.length) {
-      const latest = dates.sort().reverse()[0];
-      lastUpdated.textContent = "Data last updated: " + latest;
+      lastUpdated.textContent = "Data last updated: " + dates.sort().reverse()[0];
     }
   }
 
-  // ── Filter + render ───────────────────────────────────────────────────────
   function filtered() {
     return allListings.filter(l => {
       if (fRegion.value && l.region !== fRegion.value) return false;
@@ -654,8 +712,7 @@
   }
 
   function sendHeight() {
-    const h = document.body.scrollHeight;
-    window.parent.postMessage({ height: h }, "*");
+    window.parent.postMessage({ height: document.body.scrollHeight }, "*");
   }
 
   function render() {
@@ -674,14 +731,12 @@
     setTimeout(sendHeight, 100);
   }
 
-  // ── Card ─────────────────────────────────────────────────────────────────
   function renderCard(l) {
-    const featured = l.is_featured ? `<div class="featured-badge">⭐ Featured</div>` : "";
-
+    const featured = l.is_featured ? `<div class="featured-badge">Featured</div>` : "";
     const priceOverlay = l.asking_price ? `<div class="card-price-overlay">${x(l.asking_price)}</div>` : "";
     const img = l.image_url
       ? `<div class="card-img-wrap"><img class="card-img" src="${x(l.image_url)}" alt="${x(l.title)}" loading="lazy" onerror="this.parentElement.outerHTML='<div class=card-img-placeholder><div class=card-placeholder-price>${x(l.asking_price||"")}</div></div>'" /><div class="card-img-overlay"></div>${priceOverlay}</div>`
-      : `<div class="card-img-placeholder">${priceOverlay ? `<div class="card-placeholder-price">${x(l.asking_price||"")}</div>` : ""}</div>`;
+      : `<div class="card-img-placeholder">${l.asking_price ? `<div class="card-placeholder-price">${x(l.asking_price)}</div>` : ""}</div>`;
 
     const badges = [
       typeBadge(l.practice_type),
@@ -691,23 +746,24 @@
 
     const isFinancial = v => v && /[£\d]/.test(v.slice(0, 4));
     const fins = [];
-    if (l.turnover && isFinancial(l.turnover))  fins.push({ label: "Turnover",  value: l.turnover,  cls: "" });
-    if (l.ebitda   && isFinancial(l.ebitda))    fins.push({ label: "EBITDA",    value: l.ebitda,    cls: "" });
-    if (l.uda_value) fins.push({ label: "UDA Value", value: l.uda_value, cls: "" });
+    if (l.turnover && isFinancial(l.turnover)) fins.push({ label: "Turnover",  value: l.turnover });
+    if (l.ebitda   && isFinancial(l.ebitda))   fins.push({ label: "EBITDA",    value: l.ebitda });
+    if (l.uda_value)                            fins.push({ label: "UDA Value", value: l.uda_value });
 
-    const financials = fins.length ? `<div class="financials">${fins.map(f =>
-      `<div class="fin-item"><div class="fin-label">${x(f.label)}</div><div class="fin-value ${f.cls}">${x(f.value)}</div></div>`
-    ).join("")}</div>` : "";
+    const financials = fins.length
+      ? `<div class="financials">${fins.map(f => `<div class="fin-item"><div class="fin-label">${x(f.label)}</div><div class="fin-value">${x(f.value)}</div></div>`).join("")}</div>`
+      : "";
 
-    let hlRaw = (l.highlights || "").split("|").map(s => s.trim()).filter(Boolean).slice(0, 5);
+    let hlRaw = (l.highlights || "").split("|").map(s => s.trim()).filter(Boolean).slice(0, 4);
     if (!hlRaw.length) {
-      if (l.turnover && isFinancial(l.turnover))  hlRaw.push("Turnover " + l.turnover);
-      if (l.ebitda   && isFinancial(l.ebitda))    hlRaw.push("EBITDA " + l.ebitda);
+      if (l.turnover && isFinancial(l.turnover)) hlRaw.push("Turnover " + l.turnover);
+      if (l.ebitda   && isFinancial(l.ebitda))   hlRaw.push("EBITDA " + l.ebitda);
       if (l.num_surgeries) hlRaw.push(l.num_surgeries + " surgeries");
       if (l.tenure)        hlRaw.push(l.tenure + " property");
-      if (l.uda_value)     hlRaw.push("UDA rate " + l.uda_value);
     }
-    const hlHtml = hlRaw.length ? `<div class="highlights">${hlRaw.map(h => `<div class="highlight">${x(h)}</div>`).join("")}</div>` : "";
+    const hlHtml = hlRaw.length
+      ? `<div class="highlights">${hlRaw.map(h => `<div class="highlight">${x(h)}</div>`).join("")}</div>`
+      : "";
 
     const brokerEl = l.broker_logo_url
       ? `<img class="broker-logo" src="${x(l.broker_logo_url)}" alt="${x(l.broker_name || '')}" />`
@@ -740,17 +796,13 @@
   }
   function tenureBadge(t) {
     if (!t) return "";
-    const cls = t === "Freehold" ? "freehold" : "leasehold";
-    return `<span class="badge badge-${cls}">${x(t)}</span>`;
+    return `<span class="badge badge-${t === "Freehold" ? "freehold" : "leasehold"}">${x(t)}</span>`;
   }
 
-  // ── Modal ─────────────────────────────────────────────────────────────────
   function openModal(listing) {
     currentListing = listing;
     modalTitle.textContent  = listing.title || "Find Out More";
     modalBroker.textContent = listing.broker_name ? "Listed by " + listing.broker_name : "";
-    // Reset form
-    modalBody.innerHTML = modalBody.innerHTML; // force re-render (clears previous state)
     showModalForm();
     modal.classList.add("open");
   }
@@ -778,7 +830,7 @@
         </div>
         <div id="form-error" class="form-error" style="display:none"></div>
         <button class="btn-submit" id="btn-submit" onclick="submitLead()">Send Enquiry</button>
-        <p style="font-size:11px;color:var(--bod-text-light);text-align:center;margin-top:-4px">Your details will be shared with the listing broker.</p>
+        <p style="font-size:11px;font-weight:600;color:var(--bod-text-light);text-align:center;margin-top:-4px">Your details will be shared with the listing broker.</p>
       </div>`;
   }
 
@@ -795,13 +847,11 @@
 
     if (!name || !phone || !email) {
       errEl.textContent = "Please fill in your name, phone and email.";
-      errEl.style.display = "block";
-      return;
+      errEl.style.display = "block"; return;
     }
     if (!email.includes("@")) {
       errEl.textContent = "Please enter a valid email address.";
-      errEl.style.display = "block";
-      return;
+      errEl.style.display = "block"; return;
     }
 
     btn.disabled = true;
@@ -816,21 +866,12 @@
     };
 
     try {
-      if (APPS_SCRIPT_URL === "PASTE_YOUR_APPS_SCRIPT_URL_HERE") {
-        // Dev mode: log to console instead of posting
-        console.log("[BizDentistry] Lead (Apps Script not yet configured):", payload);
-        showSuccess();
-        return;
-      }
-      await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
+      await fetch(APPS_SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) });
       showSuccess();
     } catch (err) {
       btn.disabled = false;
       btn.textContent = "Send Enquiry";
-      errEl.textContent = "Something went wrong. Please try again or email us directly.";
+      errEl.textContent = "Something went wrong. Please try again.";
       errEl.style.display = "block";
     }
   }
@@ -839,20 +880,18 @@
     modalBody.innerHTML = `
       <div class="form-success">
         <div class="icon">✅</div>
-        <h3>Enquiry sent!</h3>
+        <h3>Enquiry Sent!</h3>
         <p>We'll be in touch shortly to connect you with the broker for this practice.</p>
       </div>`;
   }
 
-  // ── Error state ───────────────────────────────────────────────────────────
   function showError(msg) {
     countEl.textContent = "—";
     resultsBar.textContent = "Unable to load listings";
-    grid.innerHTML = `<div class="state-box"><div class="icon">⚠️</div><div class="title">Directory temporarily unavailable</div><div class="desc">Please refresh to try again. If the problem persists, check that the Google Sheet is published and set to "Anyone with the link can view".</div></div>`;
+    grid.innerHTML = `<div class="state-box"><div class="icon">⚠️</div><div class="title">Directory temporarily unavailable</div><div class="desc">Please refresh to try again.</div></div>`;
     console.error("[BizDentistry]", msg);
   }
 
-  // ── XSS-safe escape ───────────────────────────────────────────────────────
   function formatPrice(v) {
     if (!v) return null;
     const s = String(v).replace(/,/g, "");
@@ -867,14 +906,12 @@
     return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
   }
 
-  // ── Filter listeners ──────────────────────────────────────────────────────
   [fRegion, fType, fTenure, fBroker].forEach(el => el.addEventListener("change", render));
   resetBtn.addEventListener("click", () => {
     fRegion.value = ""; fType.value = ""; fTenure.value = ""; fBroker.value = "";
     render();
   });
 
-  // ── Boot ──────────────────────────────────────────────────────────────────
   loadData();
 </script>
 </body>
