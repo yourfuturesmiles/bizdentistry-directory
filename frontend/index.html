@@ -647,6 +647,10 @@
       const seen = new Map();
       allListings.forEach(l => { if (l.listing_id) seen.set(l.listing_id, l); });
       allListings = [...seen.values()];
+      for (let i = allListings.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allListings[i], allListings[j]] = [allListings[j], allListings[i]];
+      }
       allListings.sort((a, b) => (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0));
 
       buildFilters();
