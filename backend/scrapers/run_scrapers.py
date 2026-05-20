@@ -13,7 +13,10 @@ import sys
 from backend.database import service_client
 from backend.scrapers.christie import ChristieScraper
 from backend.scrapers.dental_elite import DentalEliteScraper
+from backend.scrapers.frank_taylor import FrankTaylorScraper
+from backend.scrapers.henry_schein import HenryScheinScraper
 from backend.scrapers.lily_head import LilyHeadScraper
+from backend.scrapers.pfm_dental import PFMDentalScraper
 
 logging.basicConfig(
     level=logging.INFO,
@@ -23,9 +26,12 @@ logging.basicConfig(
 logger = logging.getLogger("run_scrapers")
 
 SCRAPER_MAP = {
-    "christie":     ChristieScraper,
-    "dental-elite": DentalEliteScraper,
-    "lily-head":    LilyHeadScraper,
+    "christie":      ChristieScraper,
+    "dental-elite":  DentalEliteScraper,
+    "frank-taylor":  FrankTaylorScraper,
+    "henry-schein":  HenryScheinScraper,
+    "lily-head":     LilyHeadScraper,
+    "pfm-dental":    PFMDentalScraper,
 }
 
 
