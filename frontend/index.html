@@ -369,6 +369,14 @@
       align-items: center; justify-content: center; padding: 20px;
     }
     .modal-overlay.open { display: flex; }
+    @media (max-width: 900px) {
+      .modal-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: auto;
+        min-height: 100%;
+        align-items: flex-start;
+      }
+    }
     .modal {
       background: var(--bod-white);
       border-radius: var(--radius-lg);
@@ -768,7 +776,7 @@
   </div>
   <div class="card-footer">
     ${brokerEl}
-    <button class="btn-enquire" onclick='openModal(${JSON.stringify(l)})'>Find Out More</button>
+    <button class="btn-enquire" onclick='openModal(${JSON.stringify(l)}, event)'>Find Out More</button>
   </div>
 </article>`;
   }
@@ -783,12 +791,27 @@
     return `<span class="badge badge-${t === "Freehold" ? "freehold" : "leasehold"}">${x(t)}</span>`;
   }
 
-  function openModal(listing) {
+  function openModal(listing, evt) {
     currentListing = listing;
     modalTitle.textContent  = listing.title || "Find Out More";
     modalBroker.textContent = listing.broker_name ? "Listed by " + listing.broker_name : "";
     showModalForm();
+
+    modal.style.paddingTop = "";
     modal.classList.add("open");
+
+    // On mobile, position the modal near the tapped card and scroll to it.
+    // position:fixed is broken inside iframes on iOS — it anchors to the
+    // document top rather than the visible viewport, so we use position:absolute
+    // (via the media query above) and calculate the card's document offset.
+    if (evt && window.innerWidth <= 900) {
+      const card = evt.currentTarget.closest(".card");
+      if (card) {
+        const cardTop = card.getBoundingClientRect().top + window.pageYOffset;
+        modal.style.paddingTop = Math.max(12, cardTop - 12) + "px";
+        card.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
   }
 
   function showModalForm() {
@@ -818,8 +841,12 @@
       </div>`;
   }
 
-  modalClose.addEventListener("click", () => modal.classList.remove("open"));
-  modal.addEventListener("click", e => { if (e.target === modal) modal.classList.remove("open"); });
+  function closeModal() {
+    modal.classList.remove("open");
+    modal.style.paddingTop = "";
+  }
+  modalClose.addEventListener("click", closeModal);
+  modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
 
   async function submitLead() {
     const name    = document.getElementById("f-name")?.value.trim();
